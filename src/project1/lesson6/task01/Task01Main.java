@@ -16,24 +16,35 @@ import java.util.*;
     public class Task01Main {
         public static void main(String[] args) throws IOException {
             try {
-//                Path testFile1 = Files.createFile(Paths.get("test_new.txt"));
-//                Path testFile2 = Files.createFile(Paths.get("test_new_result.txt"));
+                String path = "test_new.txt";
+                String pathResult = "test_new_result.txt";
 
-//                System.out.println("Был ли файлы успешно созданы?");
-//                System.out.println(Files.exists(Paths.get("test_new.txt")));
-//                System.out.println(Files.exists(Paths.get("test_new_result.txt")));
+                if (Files.exists(Paths.get(path)) == false && Files.exists(Paths.get(pathResult)) == false ){
+                List<String> list = new ArrayList<>();
+                list.add("Иван");
+                list.add("Андрей");
+                list.add("Сергей");
+                list.add("Ян");
+                list.add("Егор");
+                Path testFile1 = Files.createFile(Paths.get(path));
+                Path testFile2 = Files.createFile(Paths.get(pathResult));
+                    Files.write(Paths.get(path), list
+                            , StandardCharsets.UTF_8);
+                }
 
-                String[] strings = Files.readString(Paths.get("test_new.txt"), StandardCharsets.UTF_8).split(" ");
-                Arrays.sort(strings, new Comparator<String>() {
+                List<String>  list = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
+
+                Collections.sort(list, new Comparator<String>() {
                     @Override
                     public int compare(String o1, String o2) {
                         int result = o1.compareToIgnoreCase(o2);
                         return result;
                     }
                 });
-                Files.write(Paths.get("test_new_result.txt"),
-                        Arrays.asList(strings), StandardCharsets.UTF_8);
-                System.out.println(Arrays.asList(strings));
+
+                Files.write(Paths.get(pathResult),
+                        list, StandardCharsets.UTF_8);
+                System.out.println(Arrays.asList(list));
             } catch (IOException e) {
                 e.printStackTrace();
             }
