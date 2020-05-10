@@ -13,15 +13,17 @@ import java.util.Random;
  * GenerateTextFile
  * Класс представляет собой генератор текстовых файлов.
  * И имеет следующие методы:
- * - getFiles
- *
+ * - getFiles который генерирует n файлов размером size в каталоге path,
+ * - generateRandomLine генерирует предложение, которое состоит из 1 <= n1 <= 15 слов,
+ * - generateRandomWord  слово состоит из 1 <= n2 <= 15,
+ * - getParagraf генерирует абзац из 1 <= n3 <= 20 предложений,
+ * - getArray генерирует массив из 1 <= n4 <= 1000 слов.
  *
  * @author "Andrei Prokofiev"
  */
 public class GenerateTextFile {
 
     static void getFiles(String path, int n, long size, String[] words, int probability) throws IOException {
-
         try{
             for (int i = 0; i < n; i++) {
                 StringBuilder sb = new StringBuilder(path).insert(4, i);
@@ -53,15 +55,14 @@ public class GenerateTextFile {
         int numberOfParagraf = 3;
         try {
             File file = new File(path);
-
             for (int i = 0; i < numberOfParagraf; i++) {
                 for (int j = 0; j < n3 || file.length() < size; j++) {
                     if (j == n3 - 1) {
 
-                        StringBuilder list = generateRandomLine(n2, n1, probability, n4).append("\n\r");
+                        StringBuilder list = generateRandomLine(n2, n1, probability, n4, path, size).append("\n\r");
                         Files.writeString(Paths.get(path), list, Charset.forName("windows-1251"), StandardOpenOption.APPEND);
                     } else {
-                        StringBuilder list = generateRandomLine(n2, n1, probability, n4).append("\n");
+                        StringBuilder list = generateRandomLine(n2, n1, probability, n4, path, size).append("\n");
                         Files.writeString(Paths.get(path), list, Charset.forName("windows-1251"), StandardOpenOption.APPEND);
                     }
                 }
@@ -82,11 +83,12 @@ public class GenerateTextFile {
         return sb;
     }
 
-    static StringBuilder generateRandomLine(int wordLength, int countLine, int probability, int n4) {
+    static StringBuilder generateRandomLine(int wordLength, int countLine, int probability, int n4, String path, long size) {
         Random r = new Random();
         StringBuilder sb = new StringBuilder(wordLength);
+        File file = new File(path);
         for (int j = 0; j < countLine; j++) {
-            for (int i = 0; i < wordLength; i++) { // For each letter in the word
+            for (int i = 0; i < wordLength && file.length() < size; i++) { // For each letter in the word
                 char tmp = (char) ('a' + r.nextInt('z' - 'a'));
                 if (j == 0 && i == 0) {
                     tmp = Character.toUpperCase(tmp);
@@ -115,7 +117,4 @@ public class GenerateTextFile {
         }
         return sb;
     }
-
-
-
 }
