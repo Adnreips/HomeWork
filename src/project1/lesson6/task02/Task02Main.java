@@ -1,7 +1,6 @@
 package project1.lesson6.task02;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Random;
 
 import static project1.lesson6.task02.GenerateTextFile.*;
@@ -20,7 +19,7 @@ public class Task02Main {
         int probability = 30;//вероятность вставки файла в %
         String path = "test.txt";
         int n4 = r.nextInt(999)+1;
-        int n = 20;
+        int n = 2;
         String[] words = getArray(n4);
         long size =  11024;
         getFiles(path, n, size, words, probability);
