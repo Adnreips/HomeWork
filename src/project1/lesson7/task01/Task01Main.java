@@ -25,6 +25,8 @@ public class Task01Main {
                 array[i] = random.nextInt(100);
             }
             System.out.println(Arrays.toString(array));
+            Arrays.sort(array);
+            System.out.println(Arrays.toString(array));
 
 //            int n = in.nextInt();
 //            System.out.println(factorial(n).toString());
