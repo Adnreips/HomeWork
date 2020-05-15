@@ -62,9 +62,7 @@ public class GenerateTextFile {
                     if (j == n3 - 1) {
                         list.append("\r");
                     }
-
                     Files.writeString(Paths.get(path), list, Charset.forName("windows-1251"), StandardOpenOption.APPEND);
-
                 }
             }
             System.out.println(file.length() + " byte");
