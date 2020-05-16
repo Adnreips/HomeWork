@@ -39,7 +39,7 @@ public class Worker {
             Set<Integer> set = hashMap.keySet();
             List<Integer> list = new ArrayList<>(set);
             Collections.sort(list);
-            for (int i = 0; i < list.size(); i++) {
+            for (int i = list.size() - 1; i >= 0; i--) {
                 if (list.get(i) < n) {
                     res = hashMap.get(list.get(i));
                     k = list.get(i);

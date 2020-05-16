@@ -20,7 +20,7 @@ public class Task01Main {
             Worker worker = new Worker();
             Integer [] array = worker.prepareArray();
 
-//            Integer[] array = {621, 121, 421, 1031, 531};
+//            Integer[] array = {3, 5, 4};
 
 //            System.out.println(Arrays.toString(array));
 
