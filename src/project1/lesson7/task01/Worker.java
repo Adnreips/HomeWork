@@ -36,12 +36,13 @@ public class Worker {
         }
         if (hashMap != null) {
 
-            CopyOnWriteArrayList<Integer> copyOn = new CopyOnWriteArrayList<>(hashMap.keySet());
+//            CopyOnWriteArrayList<Integer> copyOn = new CopyOnWriteArrayList<>(hashMap.keySet());
+            List<Integer> copyOn = new ArrayList<>(hashMap.keySet());
             Collections.sort(copyOn);
             for (int i = copyOn.size() - 1; i >= 0; i--) {
                 if (copyOn.get(i) < n) {
                     res = hashMap.get(copyOn.get(i));
-                    k = copyOn.get(i);
+                    k = copyOn.get(i)+1;
                     break;
                 }
             }
