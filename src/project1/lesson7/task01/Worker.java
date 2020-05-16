@@ -3,6 +3,7 @@ package project1.lesson7.task01;
 import java.math.BigInteger;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Worker
@@ -12,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Worker {
 
     protected static ConcurrentHashMap<Integer, BigInteger> hashMap = new ConcurrentHashMap<>();
-
 
     public Integer[] prepareArray() {
         Random random = new Random();
@@ -27,7 +27,7 @@ public class Worker {
     public static BigInteger factorial(Integer n) {
         BigInteger res = BigInteger.valueOf(1);
         int k = 2;
-        if (n == 1) {
+        if (n == 1 || n == 0) {
             hashMap.putIfAbsent(n, res);
             return res;
         }
@@ -37,12 +37,12 @@ public class Worker {
         if (hashMap != null) {
 
             Set<Integer> set = hashMap.keySet();
-            List<Integer> list = new ArrayList<>(set);
-            Collections.sort(list);
-            for (int i = list.size() - 1; i >= 0; i--) {
-                if (list.get(i) < n) {
-                    res = hashMap.get(list.get(i));
-                    k = list.get(i);
+            CopyOnWriteArrayList<Integer> copyOn = new CopyOnWriteArrayList<>(set);
+            Collections.sort(copyOn);
+            for (int i = copyOn.size() - 1; i >= 0; i--) {
+                if (copyOn.get(i) < n) {
+                    res = hashMap.get(copyOn.get(i));
+                    k = copyOn.get(i);
                     break;
                 }
             }
