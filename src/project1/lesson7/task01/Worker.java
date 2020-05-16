@@ -36,8 +36,7 @@ public class Worker {
         }
         if (hashMap != null) {
 
-            Set<Integer> set = hashMap.keySet();
-            CopyOnWriteArrayList<Integer> copyOn = new CopyOnWriteArrayList<>(set);
+            CopyOnWriteArrayList<Integer> copyOn = new CopyOnWriteArrayList<>(hashMap.keySet());
             Collections.sort(copyOn);
             for (int i = copyOn.size() - 1; i >= 0; i--) {
                 if (copyOn.get(i) < n) {
