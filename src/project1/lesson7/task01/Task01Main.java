@@ -26,21 +26,21 @@ public class Task01Main {
 
 
             Long start = System.currentTimeMillis();
-//            System.out.println("решение без использования многопоточности");
-//            for (int i = 0; i < array.length; i++) {
-//                worker.factorial(array[i]);
-//            }
-//            for (Iterator it = worker.hashMap.entrySet().iterator(); it.hasNext(); ) {
-//                System.out.println(it.next());
-//            }
+            System.out.println("решение без использования многопоточности");
+            for (int i = 0; i < array.length; i++) {
+                worker.factorial(array[i]);
+            }
+            for (Iterator it = worker.hashMap.entrySet().iterator(); it.hasNext(); ) {
+                System.out.println(it.next());
+            }
 
 
 
-            System.out.println("решение с использованием многопоточности");
-            Arrays.stream(array).
-                    parallel().
-                    map(Worker :: factorial).
-                    forEach(System.out::println);
+//            System.out.println("решение с использованием многопоточности");
+//            Arrays.stream(array).
+//                    parallel().
+//                    map(Worker :: factorial).
+//                    forEach(System.out::println);
 
             Long stop = System.currentTimeMillis();
 

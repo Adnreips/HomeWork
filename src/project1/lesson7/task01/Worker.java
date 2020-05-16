@@ -37,17 +37,12 @@ public class Worker {
         if (hashMap != null) {
 
             Set<Integer> set = hashMap.keySet();
-            Integer[] integers = new Integer[set.size()];
-            Iterator iterator = set.iterator();
-            for (int i = 0; i < integers.length; i++) {
-                integers[i] = (Integer) iterator.next();
-            }
-            Arrays.sort(integers);
-            for (int j = integers.length - 1; j >= 0; j--) {
-
-                if (integers[j] < n) {
-                    res = hashMap.get(integers[j]);
-                    k = integers[j] + 1;
+            List<Integer> list = new ArrayList<>(set);
+            Collections.sort(list);
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i) < n) {
+                    res = hashMap.get(list.get(i));
+                    k = list.get(i);
                     break;
                 }
             }
@@ -58,6 +53,4 @@ public class Worker {
         hashMap.putIfAbsent(n, res);
         return res;
     }
-
-
 }
