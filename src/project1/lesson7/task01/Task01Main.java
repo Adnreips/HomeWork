@@ -15,12 +15,10 @@ public class Task01Main {
 
         Worker worker = new Worker();
         Integer[] array = worker.prepareArray();
+        System.out.println(Arrays.toString(array));
         Long start1 = System.currentTimeMillis();
         for (int i = 0; i < array.length; i++) {
-            worker.factorial(array[i]);
-        }
-        for (Iterator it = worker.hashMap.entrySet().iterator(); it.hasNext(); ) {
-            System.out.println(it.next());
+            System.out.println(worker.factorial(array[i]));
         }
         Long stop1 = System.currentTimeMillis();
         Long time1 = stop1 - start1;
@@ -32,6 +30,7 @@ public class Task01Main {
 
         Long stop = System.currentTimeMillis();
         Long time = stop - start;
+        System.out.println("длинна массива: " + array.length);
         System.out.printf("решение с использованием многопоточности, %d мс %n", time);
         System.out.printf("решение без использования многопоточности, %d мс", time1);
 

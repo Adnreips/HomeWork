@@ -18,7 +18,7 @@ public class Worker {
         Random random = new Random();
         Integer[] array = new Integer[random.nextInt(1000) + 5];
         for (int i = 0; i < array.length; i++) {
-            array[i] = random.nextInt(1000);
+            array[i] = random.nextInt(1000)+5;
         }
         Arrays.sort(array);
         return array;
