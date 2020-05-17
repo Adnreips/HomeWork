@@ -12,7 +12,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class Worker {
 
-    protected static ConcurrentHashMap<Integer, BigInteger> hashMap = new ConcurrentHashMap<>();
+    protected ConcurrentHashMap<Integer, BigInteger> hashMap = new ConcurrentHashMap<>();
 
     public Integer[] prepareArray() {
         Random random = new Random();
@@ -24,7 +24,7 @@ public class Worker {
         return array;
     }
 
-    public static BigInteger factorial(Integer n) {
+    public BigInteger factorial(Integer n) {
         BigInteger res = BigInteger.valueOf(1);
         int k = 2;
         if (n == 1 || n == 0) {
