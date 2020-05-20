@@ -1,7 +1,9 @@
-package project1.lesson8.task01.newClasses;
+package project1.lesson8.task01.realization;
 
 /**
  * SimpleClass
+ * Класс который представляет собой объект в полях которого, представлены
+ * примитивные типа данных и ссылочные.
  *
  * @author "Andrei Prokofiev"
  */

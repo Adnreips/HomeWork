@@ -1,32 +1,23 @@
 package project1.lesson8.task01;
 
-import project1.lesson8.task01.newClasses.MySerialize;
-import project1.lesson8.task01.newClasses.Person;
-import project1.lesson8.task01.newClasses.Sex;
-import project1.lesson8.task01.newClasses.SimpleObject;
+import project1.lesson8.task01.realization.MySerialize;
+import project1.lesson8.task01.realization.Person;
+import project1.lesson8.task01.realization.SimpleObject;
 
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Task01Main
+ * Класс реализует основной функционал, который представлен в классе MySerialize.
  *
  * @author "Andrei Prokofiev"
  */
 public class Task01Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoSuchFieldException {
+    public static void main(String[] args) throws IOException, IllegalAccessException {
 
         String file = "Test1.txt";
-
         Person person = new Person(28, "Иван");
-        System.out.println(person);
-
         MySerialize mySerialize = new MySerialize();
-//        mySerialize.serialize(person, file);
-
-//        System.out.println(mySerialize.deSerialize(file));
-
-
         SimpleObject simpleObject = new SimpleObject();
         simpleObject.setA(999);
         simpleObject.setaBoolean(true);
@@ -34,11 +25,8 @@ public class Task01Main {
         simpleObject.setString("Aaaaa");
         simpleObject.setC('c');
         simpleObject.setPerson(person);
-
         mySerialize.serialize(simpleObject, file);
-        System.out.println(mySerialize.deSerialize(file));;
-
+        System.out.println(mySerialize.deSerialize(file));
 
     }
-
 }

@@ -1,4 +1,4 @@
-package project1.lesson8.task01.newClasses;
+package project1.lesson8.task01.realization;
 
 import java.io.*;
 import java.lang.reflect.*;
@@ -10,13 +10,16 @@ import java.lang.reflect.Field;
 
 /**
  * MySerialize
+ * Класс содержит методы, которе выполняют сериализацию объекта Object в файл file
+ * и десериализацию объекта из этого файла, данная операция выполняется,
+ * как с примитивными типами так и с ссылочными.
  *
  * @author "Andrei Prokofiev"
  */
 public class MySerialize {
 
-    public void serialize(Object o, String file) throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException {
-        System.out.println("serialize=================");
+    public void serialize(Object o, String file) throws IOException, IllegalAccessException {
+
         Class myClassObject = o.getClass();
         if (Files.exists(Paths.get(file)) == false) {
             Files.createFile(Paths.get(file));
@@ -27,44 +30,35 @@ public class MySerialize {
         for (int i = 0; i < fields.length; i++) {
             Files.writeString(Paths.get(file), fields[i].getName(), StandardOpenOption.APPEND);
             Files.writeString(Paths.get(file), System.lineSeparator(), StandardOpenOption.APPEND);
-            Files.writeString(Paths.get(file), fields[i].getType().getName(), StandardOpenOption.APPEND);
-            Files.writeString(Paths.get(file), System.lineSeparator(), StandardOpenOption.APPEND);
+            if (fields[i].getType().isPrimitive() || fields[i].getType().getName().contains("String")) {
+                Files.writeString(Paths.get(file), fields[i].getType().getName(), StandardOpenOption.APPEND);
+                Files.writeString(Paths.get(file), System.lineSeparator(), StandardOpenOption.APPEND);
+            } else {
+                Files.writeString(Paths.get(file), fields[i].getType().getName(), StandardOpenOption.APPEND);
+                Files.writeString(Paths.get(file), System.lineSeparator(), StandardOpenOption.APPEND);
+                serialize(fields[i].get(o), "test2.txt");
+            }
             fields[i].setAccessible(true);
             Files.writeString(Paths.get(file), fields[i].get(o).toString(), StandardOpenOption.APPEND);
             Files.writeString(Paths.get(file), System.lineSeparator(), StandardOpenOption.APPEND);
-            // имя - "а" fields[i].getName()
-            // тип - int
-            // значение - 999 fields[i].get(o)
-
         }
-
-
     }
 
-    public Object deSerialize(String file) throws IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-
-        System.out.println("deSerialize=================");
+    public Object deSerialize(String file) {
         Object instance = null;
-
         try {
             File file1 = new File(file);
             FileReader fileReader = new FileReader(file1);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String className = bufferedReader.readLine();
             Class myClassObject = Class.forName(className);
-            System.out.println("Создаю объект: ");
             Constructor defaultConstructor = myClassObject.getConstructor();
             instance = defaultConstructor.newInstance();
-            System.out.println(instance);
             String fromBufferedReader = bufferedReader.readLine();
-
-
             while (fromBufferedReader != null) {
-
                 Field field = myClassObject.getDeclaredField(fromBufferedReader);
                 fromBufferedReader = bufferedReader.readLine();
                 field.setAccessible(true);
-
                 if (fromBufferedReader.contains("byte")) {
                     fromBufferedReader = bufferedReader.readLine();
                     field.setByte(instance, Byte.parseByte(fromBufferedReader));
@@ -101,14 +95,10 @@ public class MySerialize {
                                                 if (fromBufferedReader.contains("String")) {
                                                     fromBufferedReader = bufferedReader.readLine();
                                                     field.set(instance, fromBufferedReader);
-                                                }
-                                                else {
-                                                    System.out.println(fromBufferedReader);
+                                                } else {
                                                     fromBufferedReader = bufferedReader.readLine();
                                                     System.out.println(fromBufferedReader);
-
-//                                                    serialize(fromBufferedReader,"test2.txt");
-                                                    field.set(instance, fromBufferedReader);
+                                                    field.set(instance, deSerialize("test2.txt"));
 
                                                 }
                                             }
@@ -120,35 +110,10 @@ public class MySerialize {
                     }
                 }
                 fromBufferedReader = bufferedReader.readLine();
-
             }
-            // имя - "а" fields[i].getName()
-            // значение - 999 fields[i].get(o)
-            // тип - int
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         return instance;
     }
 }
-//        int mods = myClassObject.getModifiers();
-//        if (Modifier.isPublic(mods)) {
-//            System.out.println("public");
-//        }
-//        if (Modifier.isAbstract(mods)) {
-//            System.out.println("abstract");
-//        }
-//        if (Modifier.isFinal(mods)) {
-//            System.out.println("final");
-//        }
-//        Field[] declaredFields = myClassObject.getDeclaredFields();
-//        for (Field field :declaredFields) {
-//            System.out.println(field);
-//        }
-
-//        declaredFields.setAccessible(true);
-//        int horsepowerValue = horsepowerField.getInt(car);
-//        System.out.println(horsepowerValue); //output: 500
