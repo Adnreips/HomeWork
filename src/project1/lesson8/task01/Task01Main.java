@@ -15,9 +15,10 @@ import java.io.*;
 public class Task01Main {
     public static void main(String[] args) throws IOException, IllegalAccessException {
 
-        String file = "Test1.txt";
+        String file = "test1.txt";
         Person person = new Person(28, "Иван");
         MySerialize mySerialize = new MySerialize();
+
         SimpleObject simpleObject = new SimpleObject();
         simpleObject.setA(999);
         simpleObject.setaBoolean(true);
@@ -25,7 +26,10 @@ public class Task01Main {
         simpleObject.setString("Aaaaa");
         simpleObject.setC('c');
         simpleObject.setPerson(person);
+        System.out.println("До применения сериализации: ");
+        System.out.println(simpleObject);
         mySerialize.serialize(simpleObject, file);
+        System.out.println("После применения сериализации: ");
         System.out.println(mySerialize.deSerialize(file));
 
     }
