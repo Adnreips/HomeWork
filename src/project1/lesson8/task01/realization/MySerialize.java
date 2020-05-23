@@ -1,11 +1,7 @@
-package project1.lesson8.task01.realization;
+package src.project1.lesson8.task01.realization;
 
 import java.io.*;
-import java.lang.reflect.*;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 /**
@@ -48,7 +44,7 @@ public class MySerialize {
                 fileWriter.write(System.lineSeparator());
             }
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 //        Files.writeString(Paths.get(file), myClassObject.getName());
 //        Files.writeString(Paths.get(file), System.lineSeparator(), StandardOpenOption.APPEND);
@@ -87,45 +83,37 @@ public class MySerialize {
                 Field field = myClassObject.getDeclaredField(fromBufferedReader);
                 fromBufferedReader = bufferedReader.readLine();
                 field.setAccessible(true);
+                String value = bufferedReader.readLine();
                 switch (fromBufferedReader) {
+
                     case ("byte"):
-                        fromBufferedReader = bufferedReader.readLine();
-                        field.setByte(instance, Byte.parseByte(fromBufferedReader));
+                        field.setByte(instance, Byte.parseByte(value));
                         break;
                     case ("short"):
-                        fromBufferedReader = bufferedReader.readLine();
-                        field.setShort(instance, Short.parseShort(fromBufferedReader));
+                        field.setShort(instance, Short.parseShort(value));
                         break;
                     case ("int"):
-                        fromBufferedReader = bufferedReader.readLine();
-                        field.setInt(instance, Integer.parseInt(fromBufferedReader));
+                        field.setInt(instance, Integer.parseInt(value));
                         break;
                     case ("long"):
-                        fromBufferedReader = bufferedReader.readLine();
-                        field.setLong(instance, Long.parseLong(fromBufferedReader));
+                        field.setLong(instance, Long.parseLong(value));
                         break;
                     case ("boolean"):
-                        fromBufferedReader = bufferedReader.readLine();
-                        field.setBoolean(instance, Boolean.valueOf(fromBufferedReader));
+                        field.setBoolean(instance, Boolean.valueOf(value));
                         break;
                     case ("char"):
-                        fromBufferedReader = bufferedReader.readLine();
-                        field.setChar(instance, fromBufferedReader.charAt(0));
+                        field.setChar(instance, value.charAt(0));
                         break;
                     case ("float"):
-                        fromBufferedReader = bufferedReader.readLine();
-                        field.setFloat(instance, Float.parseFloat(fromBufferedReader));
+                        field.setFloat(instance, Float.parseFloat(value));
                         break;
                     case ("double"):
-                        fromBufferedReader = bufferedReader.readLine();
-                        field.setDouble(instance, Double.parseDouble(fromBufferedReader));
+                        field.setDouble(instance, Double.parseDouble(value));
                         break;
                     case ("java.lang.String"):
-                        fromBufferedReader = bufferedReader.readLine();
-                        field.set(instance, fromBufferedReader);
+                        field.set(instance, value);
                         break;
                     default:
-                        fromBufferedReader = bufferedReader.readLine();
                         field.set(instance, deSerialize("test2.txt"));
                         break;
                 }

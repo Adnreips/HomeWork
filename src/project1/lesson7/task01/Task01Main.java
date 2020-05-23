@@ -1,4 +1,4 @@
-package project1.lesson7.task01;
+package src.project1.lesson7.task01;
 
 import java.util.Arrays;
 

@@ -1,4 +1,6 @@
-package project1.lesson8.task01.realization;
+package src.project1.lesson8.task01.realization;
+
+import java.util.Arrays;
 
 /**
  * SimpleClass
@@ -14,10 +16,7 @@ public class SimpleObject {
     String string;
     char c;
     Person person;
-
-    public void setString(String string) {
-        this.string = string;
-    }
+//    int [] array;
 
     public void setA(int a) {
         this.a = a;
@@ -31,6 +30,10 @@ public class SimpleObject {
         this.aBoolean = aBoolean;
     }
 
+    public void setString(String string) {
+        this.string = string;
+    }
+
     public void setC(char c) {
         this.c = c;
     }
@@ -38,6 +41,10 @@ public class SimpleObject {
     public void setPerson(Person person) {
         this.person = person;
     }
+
+//    public void setArray(int[] array) {
+//        this.array = array;
+//    }
 
     @Override
     public String toString() {
@@ -48,6 +55,7 @@ public class SimpleObject {
                 ", string='" + string + '\'' +
                 ", c=" + c +
                 ", person=" + person +
+//                ", array=" + Arrays.toString(array) +
                 '}';
     }
 }

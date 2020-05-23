@@ -1,4 +1,4 @@
-package project1.lesson8.task01.realization;
+package src.project1.lesson8.task01.realization;
 
 import java.io.Serializable;
 
