@@ -15,7 +15,10 @@ public class MyClassLoader extends ClassLoader {
         byte[] bytes = new byte[(int) nameFile.length()];
 
         try (InputStream in = new FileInputStream(nameFile)) {
-            in.read(bytes);
+            while (in.read(bytes) > 0){
+
+            }
+//            in.read(bytes);
         } catch (Exception e) {
             e.printStackTrace();
         }
