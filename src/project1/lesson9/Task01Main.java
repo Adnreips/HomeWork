@@ -36,7 +36,7 @@ public class Task01Main {
 //                "    public void doWork() {\n" +
 //                "        System.out.println(\"Hello!\");    \n" +
                 in.nextLine() +
-//              для занесения в консоль:  public void doWork() { System.out.println("Hello!");
+//              для занесения в консоль:  public void doWork() { System.out.println("hi!");
                 "    }\n" +
                 "}";
 
@@ -61,9 +61,9 @@ public class Task01Main {
                     diagnostic.getSource());
         fileManager.close();
         try {
-            MyClassLoader myClassLoader = new MyClassLoader();
+            ClassLoader myClassLoader = new MyClassLoader();
 
-            Class<?> objectClass = myClassLoader.getClassFromFile(new File(className));
+            Class<?> objectClass = myClassLoader.loadClass(className);
 
             Constructor<?> constructor = objectClass.getConstructor();
 

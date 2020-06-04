@@ -74,6 +74,7 @@ public class MySerialize {
         try (FileReader fileReader = new FileReader(file1)) {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String className = bufferedReader.readLine();
+            System.out.println(className);//test2.txt     test2.txt
             Class myClassObject = Class.forName(className);
             Constructor defaultConstructor = myClassObject.getConstructor();
             instance = defaultConstructor.newInstance();

@@ -10,19 +10,31 @@ import java.io.InputStream;
  * @author "Andrei Prokofiev"
  */
 public class MyClassLoader extends ClassLoader {
+    @Override
+    public Class<?> loadClass(String name) throws ClassNotFoundException {
 
-    public Class getClassFromFile(File nameFile) {
-        byte[] bytes = new byte[(int) nameFile.length()];
 
-        try (InputStream in = new FileInputStream(nameFile)) {
+        return super.loadClass(name);
+
+    }
+
+
+    @Override
+    protected Class<?> findClass(String name) throws ClassNotFoundException {
+
+        File file = new File(name);
+
+        byte[] bytes = new byte[(int) file.length()];
+
+        try (InputStream in = new FileInputStream(name)) {
             while (in.read(bytes) > 0){
 
             }
-//            in.read(bytes);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return defineClass(null, bytes, 0, bytes.length);
-
     }
+
+
 }
