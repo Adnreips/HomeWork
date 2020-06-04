@@ -15,7 +15,7 @@ import javassist.ClassPool;
  *
  * @author "Andrei Prokofiev"
  */
-public class Metaspace {
+public class MetaspaceOut {
     public static void main(String[] args) throws CannotCompileException {
 
         ClassPool pool = ClassPool.getDefault();
