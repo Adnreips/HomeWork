@@ -20,7 +20,7 @@ public class MyClassLoader extends ClassLoader {
 
 
     @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
+    protected Class<?> findClass(String name) {
 
         File file = new File(name);
 

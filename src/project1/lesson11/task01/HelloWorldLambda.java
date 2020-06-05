@@ -1,7 +1,5 @@
 package src.project1.lesson11.task01;
 
-import static java.util.stream.Stream.of;
-
 /**
  * HelloWorldLambda
  * Класс моделирует ошибки «NullPointerException»,
