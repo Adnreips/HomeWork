@@ -13,6 +13,7 @@ interface MyArrays {
     void arrayGo(int[] array);
     default void   doSom(){};
 
+
 }
 
 class MyArraysIndexOut {
