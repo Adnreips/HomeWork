@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DBCatalog {
+public class DBbuilder {
 
-    private DBCatalog() {
+    private DBbuilder() {
     }
 
     public static void renewDatabase(Connection connection) throws SQLException {
@@ -29,6 +29,29 @@ public class DBCatalog {
                     + "   ('FRY1', 1002, 'China'),\n"
                     + "   ('OGO', 10000, 'China');"
                     + "\n"
+                    + "DROP TABLE IF EXISTS clients ;"
+                    + "\n"
+                    + "CREATE TABLE clients (\n"
+                    + "    clientId bigserial primary key,\n"
+                    + "    name varchar(100) NOT NULL);"
+                    + "\n"
+                    + "INSERT INTO clients (name)\n"
+                    + "VALUES\n"
+                    + "('Andrey');"
+                    + "\n"
+                    + "DROP TABLE IF EXISTS orderNew ;"
+                    + "\n"
+                    + "CREATE TABLE orderNew (\n"
+                    + "    clientId bigserial primary key,\n"
+                    + "    orderId integer NOT NULL,\n"
+                    + "    productId integer NOT NULL,\n"
+                    + "    dateOrder integer NOT NULL);"
+                    + "\n"
+                    + "INSERT INTO orderNew (orderId, productId, dateOrder)\n"
+                    + "VALUES\n"
+                    + "   (100, 1, 20200608);"
+                    + "\n"
+
                     + ";");
 //                    + "DROP FUNCTION IF EXISTS multiply(integer);"
 //                    + "\n"
@@ -37,7 +60,6 @@ public class DBCatalog {
 //                    + "    RETURN a * 2;\n"
 //                    + "END\n"
 //                    + "$$ LANGUAGE 'plpgsql';");
-
 
 
         }
