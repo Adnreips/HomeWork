@@ -3,13 +3,16 @@ package src.project1.lesson15.catalog;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBbuilder {
+    static Logger logger = Logger.getLogger(DBbuilder.class.getName());
 
     private DBbuilder() {
     }
 
-    public static void renewDatabase(Connection connection) throws SQLException {
+    public static void renewDatabase(Connection connection) {
         try (Statement statement = connection.createStatement();
         ) {
             statement.execute("-- Database: customers\n"
@@ -61,6 +64,9 @@ public class DBbuilder {
 //                    + "END\n"
 //                    + "$$ LANGUAGE 'plpgsql';");
 
+
+        } catch (SQLException e){
+            logger.log(Level.WARNING, "Trouble renewDatabase", e);
 
         }
     }
