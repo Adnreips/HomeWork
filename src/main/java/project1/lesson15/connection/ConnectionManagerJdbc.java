@@ -4,13 +4,17 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import project1.lesson15.Main;
+
 
 public class ConnectionManagerJdbc implements ConnectionManager {
 
     public static final ConnectionManager INSTANCE = new ConnectionManagerJdbc();
-    Logger logger = Logger.getLogger(Connection.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionManagerJdbc.class);
 
     private ConnectionManagerJdbc() {
     }
@@ -21,18 +25,25 @@ public class ConnectionManagerJdbc implements ConnectionManager {
 
     @Override
     public Connection getConnection() throws IOException {
+
         Connection connection = null;
+        String url = "jdbc:postgresql://localhost:5432/customers";
+
         try {
 //            FileHandler fileHandler = new FileHandler();
 //            logger.addHandler(fileHandler);
 
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/customers",
+                    url,
                     "root",
                     "admin1982");
-        } catch (SQLException e) {
+            LOGGER.debug(url);
+//            LOGGER.throwing(Level.INFO, new Throwable("TEST"));
 
-            logger.log(Level.WARNING, "Trouble getConnection: ", e);
+
+        } catch (SQLException e) {
+            LOGGER.throwing(Level.INFO,e);
+//            LOGGER.log(Level.WARNING, "Trouble getConnection: ", e);
 //            e.printStackTrace();
         }
         return connection;

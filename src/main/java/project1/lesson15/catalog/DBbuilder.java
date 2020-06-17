@@ -1,13 +1,14 @@
 package project1.lesson15.catalog;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DBbuilder {
-    static Logger logger = Logger.getLogger(DBbuilder.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(DBbuilder.class);
 
     private DBbuilder() {
     }
@@ -53,20 +54,23 @@ public class DBbuilder {
                     + "INSERT INTO orderNew (orderId, productId, dateOrder)\n"
                     + "VALUES\n"
                     + "   (100, 1, 20200608);"
-                    + "\n"
-
-                    + ";");
-//                    + "DROP FUNCTION IF EXISTS multiply(integer);"
+//                    + "DROP TABLE IF EXISTS APP_LOGS ;"
 //                    + "\n"
-//                    + "CREATE OR REPLACE FUNCTION multiply(a INT) RETURNS INT AS $$\n"
-//                    + "BEGIN\n"
-//                    + "    RETURN a * 2;\n"
-//                    + "END\n"
-//                    + "$$ LANGUAGE 'plpgsql';");
+                    + "CREATE TABLE APP_LOGS (\n"
+//                    + "    LOG_ID bigserial primary key,\n"
+                    + "    LOG_ID integer,\n"
 
+                    + "    ENTRY_DATE varchar(100),\n"
+                    + "    LOGGER integer,\n"
+                    + "    LOG_LEVEL integer,\n"
+                    + "    MESSAGE varchar(100),\n"
+                    + "    EXCEPTION varchar(100));"
+                    + "\n"
+                    + ";");
+            LOGGER.debug("SQL after creat table");
 
-        } catch (SQLException e){
-            logger.log(Level.WARNING, "Trouble renewDatabase", e);
+        } catch (SQLException e) {
+//            logger.log(Level.WARNING, "Trouble renewDatabase", e);
 
         }
     }

@@ -1,5 +1,8 @@
 package project1.lesson15.dao;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import project1.lesson15.catalog.Catalog;
 import project1.lesson15.catalog.DBbuilder;
 import project1.lesson15.connection.ConnectionManager;
@@ -7,14 +10,12 @@ import project1.lesson15.connection.ConnectionManagerJdbc;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class CatalogDaoJdbc implements CatalogDao {
     private static final ConnectionManager connectionManager =
             ConnectionManagerJdbc.getInstance();
-    Logger logger = Logger.getLogger(CatalogDaoJdbc.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(CatalogDaoJdbc.class);
 
     public CatalogDaoJdbc() throws SQLException, IOException {
         DBbuilder.renewDatabase(connectionManager.getConnection());
@@ -22,19 +23,22 @@ public class CatalogDaoJdbc implements CatalogDao {
 
     @Override
     public Long addCatalog(Catalog catalog) {
-
+        String s = "INSERT INTO catalog values (DEFAULT, ?, ?, ?)";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "INSERT INTO catalog values (DEFAULT, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+                     s, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, catalog.getNameProduct());
             preparedStatement.setInt(2, catalog.getPrice());
             preparedStatement.setString(3, catalog.getProdСountry());
+
+            LOGGER.log(Level.DEBUG, "SQL add {}", s);
+
             preparedStatement.executeUpdate();
+
 
 //            FileHandler fileHandler = new FileHandler();
 //            logger.addHandler(fileHandler);
 //            logger.log(Level.WARNING,"Проверка");
-
 
 
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
@@ -44,7 +48,7 @@ public class CatalogDaoJdbc implements CatalogDao {
             }
 
         } catch (SQLException e) {
-            logger.log(Level.WARNING, "Trouble addCatalog", e);
+//            logger.log(Level.WARNING, "Trouble addCatalog", e);
 //            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,10 +58,11 @@ public class CatalogDaoJdbc implements CatalogDao {
 
     @Override
     public Catalog getCatalogById(Long productid) {
+        String sqlRequest = "SELECT * FROM catalog WHERE productid = ?";
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT * FROM catalog WHERE productid = ?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlRequest)) {
             preparedStatement.setLong(1, productid);
+            LOGGER.log(Level.DEBUG, "SQL getCatalogById {}", sqlRequest);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return new Catalog(
@@ -68,7 +73,7 @@ public class CatalogDaoJdbc implements CatalogDao {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.WARNING, "Trouble getCatalogById", e);
+//            logger.log(Level.WARNING, "Trouble getCatalogById", e);
 //            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -78,10 +83,14 @@ public class CatalogDaoJdbc implements CatalogDao {
 
     @Override
     public boolean updateCatalogById(Catalog catalog) {
+
+        String sqlRequest = "UPDATE catalog SET nameproduct=?, price=?, prodСountry=? " +
+                "WHERE productid=?";
         try (Connection connection = connectionManager.getConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE catalog SET nameproduct=?, price=?, prodСountry=? " +
-                            "WHERE productid=?")) {
+                    sqlRequest)) {
+
+                LOGGER.log(Level.DEBUG, "SQL updateCatalogById {}", sqlRequest);
 
                 connection.setAutoCommit(false);
                 Savepoint savepoint = connection.setSavepoint();
@@ -94,7 +103,7 @@ public class CatalogDaoJdbc implements CatalogDao {
                 return true;
             } catch (SQLException e) {
                 connection.rollback();
-                logger.log(Level.WARNING, "Trouble updateCatalogById", e);
+//                logger.log(Level.WARNING, "Trouble updateCatalogById", e);
 //                e.printStackTrace();
 
             }
@@ -109,13 +118,14 @@ public class CatalogDaoJdbc implements CatalogDao {
 
     @Override
     public boolean deleteCatalogById(Long productid) {
+        String sqlRequest ="DELETE FROM catalog WHERE productid=?";
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "DELETE FROM catalog WHERE productid=?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlRequest)) {
             preparedStatement.setLong(1, productid);
+            LOGGER.log(Level.DEBUG, "SQL deleteCatalogById {}", sqlRequest);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.log(Level.WARNING, "Trouble deleteCatalogById", e);
+//            logger.log(Level.WARNING, "Trouble deleteCatalogById", e);
             //            e.printStackTrace();
             return false;
         } catch (IOException e) {
