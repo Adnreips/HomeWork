@@ -11,6 +11,12 @@ import project1.lesson15.connection.ConnectionManagerJdbc;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * CatalogDaoJdbc
+ * Класс ответчает за изменения в  базе данных.
+ *
+ * @author "Andrei Prokofiev"
+ */
 
 public class CatalogDaoJdbc implements CatalogDao {
     private static final ConnectionManager connectionManager =
@@ -22,6 +28,10 @@ public class CatalogDaoJdbc implements CatalogDao {
     }
 
     @Override
+
+
+
+
     public Long addCatalog(Catalog catalog) {
         String s = "INSERT INTO catalog values (DEFAULT, ?, ?, ?)";
         try (Connection connection = connectionManager.getConnection();
@@ -35,12 +45,6 @@ public class CatalogDaoJdbc implements CatalogDao {
 
             preparedStatement.executeUpdate();
 
-
-//            FileHandler fileHandler = new FileHandler();
-//            logger.addHandler(fileHandler);
-//            logger.log(Level.WARNING,"Проверка");
-
-
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     return generatedKeys.getLong(1);
@@ -48,10 +52,9 @@ public class CatalogDaoJdbc implements CatalogDao {
             }
 
         } catch (SQLException e) {
-//            logger.log(Level.WARNING, "Trouble addCatalog", e);
-//            e.printStackTrace();
+            LOGGER.throwing(Level.ERROR, e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.throwing(Level.ERROR, e);
         }
         return 0L;
     }
@@ -73,10 +76,9 @@ public class CatalogDaoJdbc implements CatalogDao {
                 }
             }
         } catch (SQLException e) {
-//            logger.log(Level.WARNING, "Trouble getCatalogById", e);
-//            e.printStackTrace();
+            LOGGER.throwing(Level.ERROR, e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.throwing(Level.ERROR, e);
         }
         return null;
     }
@@ -103,33 +105,31 @@ public class CatalogDaoJdbc implements CatalogDao {
                 return true;
             } catch (SQLException e) {
                 connection.rollback();
-//                logger.log(Level.WARNING, "Trouble updateCatalogById", e);
-//                e.printStackTrace();
+                LOGGER.throwing(Level.ERROR, e);
 
             }
             connection.setAutoCommit(true);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.throwing(Level.ERROR, e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.throwing(Level.ERROR, e);
         }
         return false;
     }
 
     @Override
     public boolean deleteCatalogById(Long productid) {
-        String sqlRequest ="DELETE FROM catalog WHERE productid=?";
+        String sqlRequest = "DELETE FROM catalog WHERE productid=?";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlRequest)) {
             preparedStatement.setLong(1, productid);
             LOGGER.log(Level.DEBUG, "SQL deleteCatalogById {}", sqlRequest);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-//            logger.log(Level.WARNING, "Trouble deleteCatalogById", e);
-            //            e.printStackTrace();
+            LOGGER.throwing(Level.ERROR, e);
             return false;
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.throwing(Level.ERROR, e);
         }
         return true;
     }

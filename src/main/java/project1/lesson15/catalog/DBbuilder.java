@@ -1,11 +1,19 @@
 package project1.lesson15.catalog;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+/**
+ * DBbuilder
+ * Класс ответчает за обновление информации в таблицах базы данных.
+ *
+ * @author "Andrei Prokofiev"
+ */
 
 public class DBbuilder {
     private static final Logger LOGGER = LogManager.getLogger(DBbuilder.class);
@@ -54,15 +62,13 @@ public class DBbuilder {
                     + "INSERT INTO orderNew (orderId, productId, dateOrder)\n"
                     + "VALUES\n"
                     + "   (100, 1, 20200608);"
-//                    + "DROP TABLE IF EXISTS APP_LOGS ;"
+                    + "DROP TABLE IF EXISTS APP_LOGS ;"
 //                    + "\n"
                     + "CREATE TABLE APP_LOGS (\n"
-//                    + "    LOG_ID bigserial primary key,\n"
-                    + "    LOG_ID integer,\n"
-
+                    + "    LOG_ID varchar(100),\n"
                     + "    ENTRY_DATE varchar(100),\n"
-                    + "    LOGGER integer,\n"
-                    + "    LOG_LEVEL integer,\n"
+                    + "    LOGGER varchar(100),\n"
+                    + "    LOG_LEVEL varchar(100),\n"
                     + "    MESSAGE varchar(100),\n"
                     + "    EXCEPTION varchar(100));"
                     + "\n"
@@ -70,7 +76,7 @@ public class DBbuilder {
             LOGGER.debug("SQL after creat table");
 
         } catch (SQLException e) {
-//            logger.log(Level.WARNING, "Trouble renewDatabase", e);
+            LOGGER.throwing(Level.ERROR, e);
 
         }
     }
