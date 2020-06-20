@@ -1,6 +1,7 @@
 package project1.lesson05.task01.pets;
 
-import part1.lesson05.task01.person.PersonComporator;
+
+import project1.lesson05.task01.person.PersonComporator;
 
 import java.util.Comparator;
 

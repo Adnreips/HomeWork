@@ -1,9 +1,9 @@
 package project1.lesson02.task03.personGenerator;
 
-import part1.lesson02.task03.person.ManName;
-import part1.lesson02.task03.person.Person;
-import part1.lesson02.task03.person.Sex;
-import part1.lesson02.task03.person.WomanName;
+import project1.lesson02.task03.person.ManName;
+import project1.lesson02.task03.person.Person;
+import project1.lesson02.task03.person.WomanName;
+import project1.lesson02.task03.person.Sex;
 
 import java.util.Random;
 

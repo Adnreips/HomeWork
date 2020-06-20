@@ -1,7 +1,6 @@
 package project1.lesson05.task01.pets;
 
-import part1.lesson05.task01.person.Person;
-
+import project1.lesson05.task01.person.Person;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -24,6 +23,9 @@ public class Pet {
         this.person = person;
         this.weight = weight;
     }
+
+
+
 
     public UUID getId() {
         return id;

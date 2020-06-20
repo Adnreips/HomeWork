@@ -1,6 +1,7 @@
 package project1.lesson02.task03.sort;
 
-import part1.lesson02.task03.person.Person;
+
+import project1.lesson02.task03.person.Person;
 
 import java.util.Comparator;
 

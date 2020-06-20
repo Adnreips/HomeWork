@@ -1,10 +1,14 @@
 package project1.lesson02.task03;
 
-import part1.lesson02.task03.person.*;
-import part1.lesson02.task03.personGenerator.PersonGenerator;
-import part1.lesson02.task03.sort.SortByJavaStandard;
-import part1.lesson02.task03.sort.SortByMerge;
-import part1.lesson02.task03.sort.SortByQuickSort;
+
+
+import project1.lesson02.task03.person.PersconException;
+import project1.lesson02.task03.person.Person;
+import project1.lesson02.task03.personGenerator.PersonGenerator;
+import project1.lesson02.task03.sort.SortByJavaStandard;
+import project1.lesson02.task03.person.PersonComporator;
+import project1.lesson02.task03.sort.SortByMerge;
+import project1.lesson02.task03.sort.SortByQuickSort;
 
 import java.util.Arrays;
 import java.util.List;

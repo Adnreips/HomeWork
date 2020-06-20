@@ -1,9 +1,9 @@
 package project1.lesson05.task01;
 
-import part1.lesson05.task01.person.Person;
-import part1.lesson05.task01.person.Sex;
-import part1.lesson05.task01.pets.Cat;
-import part1.lesson05.task01.pets.Pet;
+import project1.lesson05.task01.person.Person;
+import project1.lesson05.task01.person.Sex;
+import project1.lesson05.task01.pets.Cat;
+import project1.lesson05.task01.pets.Pet;
 
 import java.util.Iterator;
 import java.util.Set;

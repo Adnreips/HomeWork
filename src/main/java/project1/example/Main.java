@@ -1,8 +1,6 @@
 package project1.example;
 
-
-import part1.lesson05.task01.person.Person;
-import part1.lesson05.task01.person.Sex;
+import project1.lesson8.task01.realization.Person;
 
 /**
  * Main
@@ -17,7 +15,7 @@ public class Main {
 
     private void doWork() {
 
-        Person personVasya = new Person(12, Sex.MALE, "Vasya");
+        Person personVasya = new Person(12, "Vasya");
 
         SuperBox<Object> boxObject = new SuperBox<>();
         boxObject.internalVariable = new Object();
@@ -40,6 +38,5 @@ public class Main {
 
     private void doWithPerson(SuperBox<Person> box){
         //box.object хочу узнать возраст
-        box.internalVariable.getSex();
     }
 }

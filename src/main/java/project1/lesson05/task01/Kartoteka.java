@@ -1,8 +1,9 @@
 package project1.lesson05.task01;
 
-import part1.lesson05.task01.person.Person;
-import part1.lesson05.task01.pets.Pet;
-import part1.lesson05.task01.pets.PetsComporator;
+
+import project1.lesson05.task01.person.Person;
+import project1.lesson05.task01.pets.Pet;
+import project1.lesson05.task01.pets.PetsComporator;
 
 import java.util.*;
 
@@ -74,4 +75,6 @@ public class Kartoteka {
             System.out.println(p);
         }
     }
+
+
 }
