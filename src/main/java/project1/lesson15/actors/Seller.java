@@ -11,8 +11,8 @@ import org.apache.logging.log4j.MarkerManager;
  * @author "Andrei Prokofiev"
  */
 public class Seller {
-    Integer sellerId;
-    String nameSeller;
+    private Integer sellerId;
+    private String nameSeller;
     private static final Logger LOGGER = LogManager.getLogger(Seller.class);
     Marker marker = MarkerManager.getMarker("consoleonly");
 

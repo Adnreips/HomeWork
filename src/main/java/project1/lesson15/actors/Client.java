@@ -11,8 +11,8 @@ import org.apache.logging.log4j.MarkerManager;
  * @author "Andrei Prokofiev"
  */
 public class Client {
-    Integer clientID;
-    String nameClient;
+    private Integer clientID;
+    private String nameClient;
     private static final Logger LOGGER = LogManager.getLogger(Client.class);
 
     Marker marker = MarkerManager.getMarker("consoleonly").setParents();
