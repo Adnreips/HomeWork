@@ -3,6 +3,8 @@ package project1.lesson15.dao;
 
 import project1.lesson15.catalog.Catalog;
 
+import java.sql.Connection;
+
 /**
  * CatalogDao
  *
@@ -16,4 +18,8 @@ public interface CatalogDao {
     boolean updateCatalogById(Catalog catalog);
 
     boolean deleteCatalogById(Long id);
+    void renewDatabase();
+
+    ;
+
 }

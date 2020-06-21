@@ -1,4 +1,4 @@
-package project1.lesson15.actors;
+package project1.lesson15.seller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

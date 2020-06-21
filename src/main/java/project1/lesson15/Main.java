@@ -3,8 +3,10 @@ package project1.lesson15;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import project1.lesson15.actors.Client;
-import project1.lesson15.actors.Seller;
+import project1.lesson15.client.Client;
+import project1.lesson15.connection.ConnectionManager;
+import project1.lesson15.connection.ConnectionManagerJdbc;
+import project1.lesson15.seller.Seller;
 import project1.lesson15.catalog.Catalog;
 import project1.lesson15.dao.CatalogDaoJdbc;
 
@@ -30,7 +32,8 @@ public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) throws SQLException, IOException {
-        CatalogDaoJdbc catalogDao = new CatalogDaoJdbc();
+        ConnectionManager connectionManager = ConnectionManagerJdbc.getInstance();
+        CatalogDaoJdbc catalogDao = new CatalogDaoJdbc(connectionManager);
 
         Catalog tovar = new Catalog(null, "Helicopter",
                 2500, "USA");

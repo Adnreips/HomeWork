@@ -41,8 +41,6 @@ public class ConnectionManagerJdbc implements ConnectionManager {
                     "root",
                     "admin1982");
             LOGGER.debug(url);
-//            LOGGER.throwing(Level.ERROR, new Throwable("TEST"));
-
 
         } catch (SQLException e) {
             LOGGER.throwing(Level.ERROR, e);

@@ -32,7 +32,7 @@
             <AppenderRef ref="stdout" level="DEBUG"/>
             <AppenderRef ref="db" level="ERROR"/>
         </Root>
-        <Logger name="project1.lesson15.actors.Client" level="info" additivity="false">
+        <Logger name="project1.lesson15.client.Client" level="info" additivity="false">
             <AppenderRef ref="file2" level="INFO"/>
             <AppenderRef ref="stdout" level="INFO"/>
         </Logger>

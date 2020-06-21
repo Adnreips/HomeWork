@@ -4,12 +4,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import project1.lesson15.catalog.Catalog;
-import project1.lesson15.catalog.DBbuilder;
 import project1.lesson15.connection.ConnectionManager;
-import project1.lesson15.connection.ConnectionManagerJdbc;
-
 import java.io.IOException;
 import java.sql.*;
+
 
 /**
  * CatalogDaoJdbc
@@ -19,19 +17,16 @@ import java.sql.*;
  */
 
 public class CatalogDaoJdbc implements CatalogDao {
-    private static final ConnectionManager connectionManager =
-            ConnectionManagerJdbc.getInstance();
     private static final Logger LOGGER = LogManager.getLogger(CatalogDaoJdbc.class);
+    private ConnectionManager connectionManager;
 
-    public CatalogDaoJdbc() throws SQLException, IOException {
-        DBbuilder.renewDatabase(connectionManager.getConnection());
+
+
+    public CatalogDaoJdbc(ConnectionManager connectionManager)  {
+       this.connectionManager = connectionManager;
     }
 
     @Override
-
-
-
-
     public Long addCatalog(Catalog catalog) {
         String s = "INSERT INTO catalog values (DEFAULT, ?, ?, ?)";
         try (Connection connection = connectionManager.getConnection();
@@ -132,5 +127,68 @@ public class CatalogDaoJdbc implements CatalogDao {
             LOGGER.throwing(Level.ERROR, e);
         }
         return true;
+    }
+
+    @Override
+    public void renewDatabase() {
+        try (Connection connection = connectionManager.getConnection();
+                Statement statement = connection.createStatement();
+        ) {
+            statement.execute("-- Database: customers\n"
+                    + "DROP TABLE IF EXISTS catalog ;"
+                    + "\n"
+                    + "CREATE TABLE catalog (\n"
+                    + "    productId bigserial primary key,\n"
+                    + "    nameProduct varchar(100) NOT NULL,\n"
+                    + "    price integer NOT NULL,\n"
+                    + "    prodСountry varchar(100) NOT NULL);"
+                    + "\n"
+                    + "INSERT INTO catalog (nameProduct, price, prodСountry)\n"
+                    + "VALUES\n"
+                    + "   ('P1', 100, 'China'),\n"
+                    + "   ('EDGE', 1150, 'China'),\n"
+                    + "   ('FRY1', 1001, 'China'),\n"
+                    + "   ('FRY1', 1002, 'China'),\n"
+                    + "   ('OGO', 10000, 'China');"
+                    + "\n"
+                    + "DROP TABLE IF EXISTS clients ;"
+                    + "\n"
+                    + "CREATE TABLE clients (\n"
+                    + "    clientId bigserial primary key,\n"
+                    + "    name varchar(100) NOT NULL);"
+                    + "\n"
+                    + "INSERT INTO clients (name)\n"
+                    + "VALUES\n"
+                    + "('Andrey');"
+                    + "\n"
+                    + "DROP TABLE IF EXISTS orderNew ;"
+                    + "\n"
+                    + "CREATE TABLE orderNew (\n"
+                    + "    clientId bigserial primary key,\n"
+                    + "    orderId integer NOT NULL,\n"
+                    + "    productId integer NOT NULL,\n"
+                    + "    dateOrder integer NOT NULL);"
+                    + "\n"
+                    + "INSERT INTO orderNew (orderId, productId, dateOrder)\n"
+                    + "VALUES\n"
+                    + "   (100, 1, 20200608);"
+                    + "DROP TABLE IF EXISTS APP_LOGS ;"
+//                    + "\n"
+                    + "CREATE TABLE APP_LOGS (\n"
+                    + "    LOG_ID varchar(100),\n"
+                    + "    ENTRY_DATE varchar(100),\n"
+                    + "    LOGGER varchar(100),\n"
+                    + "    LOG_LEVEL varchar(100),\n"
+                    + "    MESSAGE varchar(100),\n"
+                    + "    EXCEPTION varchar(100));"
+                    + "\n"
+                    + ";");
+            LOGGER.debug("SQL after creat table");
+
+        } catch (SQLException | IOException e) {
+            LOGGER.throwing(Level.ERROR, e);
+
+        }
+
     }
 }
