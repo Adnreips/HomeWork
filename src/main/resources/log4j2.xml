@@ -33,7 +33,7 @@
             <AppenderRef ref="db" level="ERROR"/>
         </Root>
         <Logger name="project1.lesson15.client.Client" level="info" additivity="false">
-            <AppenderRef ref="file2" level="INFO"/>
+            <AppenderRef ref="file2" level="WARN"/>
             <AppenderRef ref="stdout" level="INFO"/>
         </Logger>
     </Loggers>

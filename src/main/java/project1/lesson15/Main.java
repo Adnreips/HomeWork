@@ -4,14 +4,18 @@ package project1.lesson15;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import project1.lesson15.client.Client;
+import project1.lesson15.client.ClientServes;
 import project1.lesson15.connection.ConnectionManager;
 import project1.lesson15.connection.ConnectionManagerJdbc;
+import project1.lesson15.dao.CatalogDao;
 import project1.lesson15.seller.Seller;
 import project1.lesson15.catalog.Catalog;
 import project1.lesson15.dao.CatalogDaoJdbc;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+
 /**
  * Main
  * В данной программе производится подключение к базе данных, создаются таблицы
@@ -24,6 +28,7 @@ import java.sql.SQLException;
  * Бизнес сообщения будуте выводиться в файл log.log из папки logs.
  * Сообщение безопасности будут выводится в файл log2.log из папки logs.
  * Системная информация будет выводиться в базу данных customers.
+ * Добавлено модульное тестирование классов и методов программы.
  *
  * @author "Andrei Prokofiev"
  */
@@ -31,28 +36,46 @@ import java.sql.SQLException;
 public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
-    public static void main(String[] args) throws SQLException, IOException {
+    public static void main(String[] args) {
         ConnectionManager connectionManager = ConnectionManagerJdbc.getInstance();
         CatalogDaoJdbc catalogDao = new CatalogDaoJdbc(connectionManager);
+        catalogDao.renewDatabase();
+        Main main = new Main();
+        main.method1(catalogDao);
+    }
 
+    public void method1(CatalogDao catalogDao)  {
         Catalog tovar = new Catalog(null, "Helicopter",
                 2500, "USA");
-        LOGGER.info(tovar);
+//        LOGGER.info(tovar);
 
         long productid = catalogDao.addCatalog(tovar);
         tovar = catalogDao.getCatalogById(productid);
 
         tovar.setPrice(1500);
         catalogDao.updateCatalogById(tovar);
-
         tovar = catalogDao.getCatalogById(productid);
         LOGGER.info(tovar);
 
-        Seller seller = new Seller(1, "Bob");
-        seller.makeBill();
+        ClientServes clientServes = new ClientServes();
+        Client client1 = new Client("Anton", LocalDate.of(1982,01,28));
+        Client client2 = new Client("Anton", LocalDate.of(1983,01,28));
+        Client client3 = new Client("Anton", LocalDate.of(1982,01,28));
+        Client client4 = new Client("Anton", LocalDate.of(1984,01,28));
+        Client client5 = new Client(null, LocalDate.of(1982,01,28));
+        client1.doPayment();
 
-        Client client = new Client(1, "Anton");
-        client.doPayment();
+        clientServes.regClient(client1);
+        clientServes.regClient(client2);
+        clientServes.regClient(client5);
+
+        LOGGER.info(clientServes.getRegClients());
+
+
+
+
+
+
 
 
     }

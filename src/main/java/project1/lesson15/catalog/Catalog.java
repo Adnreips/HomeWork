@@ -22,17 +22,11 @@ public class Catalog {
         return productId;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
 
     public String getNameProduct() {
         return nameProduct;
     }
 
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
-    }
 
     public Integer getPrice() {
         return price;
@@ -46,9 +40,6 @@ public class Catalog {
         return prodСountry;
     }
 
-    public void setProdСountry(String prodСountry) {
-        this.prodСountry = prodСountry;
-    }
 
     @Override
     public String toString() {

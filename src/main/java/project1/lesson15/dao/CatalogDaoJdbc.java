@@ -19,6 +19,10 @@ import java.sql.*;
 public class CatalogDaoJdbc implements CatalogDao {
     private static final Logger LOGGER = LogManager.getLogger(CatalogDaoJdbc.class);
     private ConnectionManager connectionManager;
+    public static final String INSERT_INTO_CATALOG = "INSERT INTO catalog values (DEFAULT, ?, ?, ?)";
+    public static final String SELECT_FROM_CATALOG = "SELECT * FROM catalog WHERE productid = ?";
+    public static final String UPDATE_CATALOG = "UPDATE catalog SET nameproduct=?, price=?, prodСountry=? WHERE productid=?";
+    public static final String DELETE_FROM_CATALOG = "DELETE FROM catalog WHERE productid=?";
 
 
 
@@ -28,15 +32,14 @@ public class CatalogDaoJdbc implements CatalogDao {
 
     @Override
     public Long addCatalog(Catalog catalog) {
-        String s = "INSERT INTO catalog values (DEFAULT, ?, ?, ?)";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     s, Statement.RETURN_GENERATED_KEYS)) {
+                     INSERT_INTO_CATALOG, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, catalog.getNameProduct());
             preparedStatement.setInt(2, catalog.getPrice());
             preparedStatement.setString(3, catalog.getProdСountry());
 
-            LOGGER.log(Level.DEBUG, "SQL add {}", s);
+            LOGGER.log(Level.DEBUG, "SQL add {}", INSERT_INTO_CATALOG);
 
             preparedStatement.executeUpdate();
 
@@ -58,9 +61,9 @@ public class CatalogDaoJdbc implements CatalogDao {
     public Catalog getCatalogById(Long productid) {
         String sqlRequest = "SELECT * FROM catalog WHERE productid = ?";
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sqlRequest)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_CATALOG)) {
             preparedStatement.setLong(1, productid);
-            LOGGER.log(Level.DEBUG, "SQL getCatalogById {}", sqlRequest);
+            LOGGER.log(Level.DEBUG, "SQL getCatalogById {}", SELECT_FROM_CATALOG);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return new Catalog(
@@ -80,14 +83,10 @@ public class CatalogDaoJdbc implements CatalogDao {
 
     @Override
     public boolean updateCatalogById(Catalog catalog) {
-
-        String sqlRequest = "UPDATE catalog SET nameproduct=?, price=?, prodСountry=? " +
-                "WHERE productid=?";
         try (Connection connection = connectionManager.getConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(
-                    sqlRequest)) {
+                    UPDATE_CATALOG)) {
 
-                LOGGER.log(Level.DEBUG, "SQL updateCatalogById {}", sqlRequest);
 
                 connection.setAutoCommit(false);
                 Savepoint savepoint = connection.setSavepoint();
@@ -95,6 +94,7 @@ public class CatalogDaoJdbc implements CatalogDao {
                 preparedStatement.setInt(2, catalog.getPrice());
                 preparedStatement.setString(3, catalog.getProdСountry());
                 preparedStatement.setInt(4, catalog.getProductId());
+                LOGGER.log(Level.DEBUG, "SQL updateCatalogById {}", UPDATE_CATALOG);
                 preparedStatement.executeUpdate();
                 connection.commit();
                 return true;
@@ -114,11 +114,10 @@ public class CatalogDaoJdbc implements CatalogDao {
 
     @Override
     public boolean deleteCatalogById(Long productid) {
-        String sqlRequest = "DELETE FROM catalog WHERE productid=?";
         try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sqlRequest)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_CATALOG)) {
             preparedStatement.setLong(1, productid);
-            LOGGER.log(Level.DEBUG, "SQL deleteCatalogById {}", sqlRequest);
+            LOGGER.log(Level.DEBUG, "SQL deleteCatalogById {}", DELETE_FROM_CATALOG);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.throwing(Level.ERROR, e);
