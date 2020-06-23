@@ -37,7 +37,8 @@ public class CatalogDaoJdbc implements CatalogDao {
                      INSERT_INTO_CATALOG, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, catalog.getNameProduct());
             preparedStatement.setInt(2, catalog.getPrice());
-            preparedStatement.setString(3, catalog.getProdСountry());
+            preparedStatement.setString(3, catalog
+                    .getProdСountry());
 
             LOGGER.log(Level.DEBUG, "SQL add {}", INSERT_INTO_CATALOG);
 
@@ -59,7 +60,6 @@ public class CatalogDaoJdbc implements CatalogDao {
 
     @Override
     public Catalog getCatalogById(Long productid) {
-        String sqlRequest = "SELECT * FROM catalog WHERE productid = ?";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_CATALOG)) {
             preparedStatement.setLong(1, productid);

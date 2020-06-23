@@ -31,7 +31,7 @@ class ClientServesTest {
 
     @BeforeAll
     public void setUp() {
-        initMocks(this);
+//        initMocks(this);
         clientServes = spy(new ClientServes());
         client = spy(new Client("Anton", LocalDate.of(1982, 01, 28)));
         client1 = spy(new Client("Anton", LocalDate.of(1983, 01, 28)));
