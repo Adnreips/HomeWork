@@ -25,6 +25,8 @@ public class Seller {
         LOGGER.warn(marker,"makeBill");
 
 
+
+
     }
 
     public boolean chackOut(){
