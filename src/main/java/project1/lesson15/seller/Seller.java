@@ -16,9 +16,6 @@ public class Seller {
     private static final Logger LOGGER = LogManager.getLogger(Seller.class);
     Marker marker = MarkerManager.getMarker("consoleonly");
 
-
-
-
     public Seller(Integer sellerId, String nameSeller) {
         this.sellerId = sellerId;
         this.nameSeller = nameSeller;
