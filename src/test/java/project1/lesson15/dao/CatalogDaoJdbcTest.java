@@ -69,6 +69,7 @@ class CatalogDaoJdbcTest {
         verify(preparedStatement, never()).executeQuery();
         verify(preparedStatement, times(1)).executeUpdate();
         assertEquals(0L, result);
+
     }
 
 }
