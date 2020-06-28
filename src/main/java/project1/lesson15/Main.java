@@ -1,6 +1,7 @@
 package project1.lesson15;
 
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import project1.lesson15.client.Client;
@@ -60,14 +61,32 @@ public class Main {
         ClientServes clientServes = new ClientServes();
         Client client1 = new Client("Anton", LocalDate.of(1982,01,28));
         Client client2 = new Client("Anton", LocalDate.of(1983,01,28));
-        Client client3 = new Client("Anton", LocalDate.of(1982,01,28));
+        Client client3 = new Client("Anton", LocalDate.of(1985,01,28));
         Client client4 = new Client("Anton", LocalDate.of(1984,01,28));
         Client client5 = new Client(null, LocalDate.of(1982,01,28));
-        client1.doPayment();
+
+        clientServes.doPayment();
 
         clientServes.regClient(client1);
         clientServes.regClient(client2);
+        try{
+            clientServes.logClient(client3);
+        }catch (RuntimeException e){
+            LOGGER.throwing(Level.WARN, e);
+        }
+
+        System.out.println("+++++++++++++++++++");
+
+        System.out.println(clientServes.getLogClients());
+
+
+        System.out.println("++++++++++++++++++");
+
+        try{
         clientServes.regClient(client5);
+        } catch (RuntimeException e){
+            LOGGER.throwing(Level.WARN, e);
+        }
 
         LOGGER.info(clientServes.getRegClients());
 

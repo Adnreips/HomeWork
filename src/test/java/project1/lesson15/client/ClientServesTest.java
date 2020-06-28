@@ -1,5 +1,8 @@
 package project1.lesson15.client;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -8,7 +11,7 @@ import org.mockito.Mock;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 import static org.mockito.Mockito.spy;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -28,6 +31,8 @@ class ClientServesTest {
     private Client client1;
     @Mock
     private Client client2;
+    private static final Logger LOGGER = LogManager.getLogger(ClientServesTest.class);
+
 
 
     @BeforeAll
@@ -37,6 +42,7 @@ class ClientServesTest {
         client = spy(new Client("Anton", LocalDate.of(1982, 01, 28)));
         client1 = spy(new Client("Anton", LocalDate.of(1983, 01, 28)));
         client2 = spy(new Client(null, LocalDate.of(1983, 01, 28)));
+
         clientServes.regClient(client);
         clientServes.logClient(client);
     }
@@ -50,11 +56,20 @@ class ClientServesTest {
         clientServes.regClient(client);
         assertEquals(clientServes.getRegClients().size(), 1);
     }
+    @Test
+    void regThrowException(){
+        Throwable throwable = assertThrows(RuntimeException.class, ()->clientServes.regClient(client2));
+        assertNotNull(throwable.getMessage());
+    }
 
     @Test
     void logClientWithOutRegistration() {
         assertEquals(clientServes.getLogClients().size(), 1);
-        clientServes.logClient(client1);
+        try{
+            clientServes.logClient(client1);}
+        catch (RuntimeException e){
+            LOGGER.throwing(Level.WARN, e);
+        }
         assertEquals(clientServes.getLogClients().size(), 1);
 
     }
@@ -71,7 +86,6 @@ class ClientServesTest {
     void regClientWithNullData() {
         clientServes.removeClient(client2);
         assertEquals(clientServes.getRegClients().size(), 1);
-
     }
     
 

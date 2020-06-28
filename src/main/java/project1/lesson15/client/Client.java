@@ -17,8 +17,6 @@ public class Client {
     public String name;
     public LocalDate dateOfBirth;
 
-    private static final Logger LOGGER = LogManager.getLogger(Client.class);
-    private static Marker marker = MarkerManager.getMarker("consoleonly").setParents();
 
     public Client( String name, LocalDate clientID) {
         this.dateOfBirth = clientID;
@@ -41,9 +39,6 @@ public class Client {
         this.name = name;
     }
 
-    public void doPayment(){
-        LOGGER.warn(marker,"doPayment");
-    }
 
     @Override
     public String toString() {
