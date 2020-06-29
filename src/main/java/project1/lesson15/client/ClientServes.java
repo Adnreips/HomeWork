@@ -33,11 +33,13 @@ public class ClientServes {
         return logClients;
     }
 
-    public List<Client> regClient(Client client) {
+    public boolean regClient(Client client) {
+        boolean flag = false;
         if (isNull(client.name) || client.name.isBlank()) {
             RuntimeException runtimeException = new RuntimeException("Name could not be empty or null");
             LOGGER.throwing(Level.INFO, runtimeException);
             throw runtimeException;
+
         }
         if (isNull(client.dateOfBirth)) {
             RuntimeException runtimeException = new RuntimeException("Date of birth could not be null");
@@ -46,16 +48,19 @@ public class ClientServes {
         }
         if (!regClients.contains(client)) {
             regClients.add(client);
+            flag = true;
         } else {
             LOGGER.throwing(Level.INFO, new RuntimeException("Customer allready exist"));
         }
-        return regClients;
+        return flag;
     }
 
-    public List<Client> logClient(Client client) {
+    public boolean logClient(Client client) {
 
+        boolean flag = false;
         if (regClients.contains(client) && !logClients.contains(client)) {
             logClients.add(client);
+            flag = true;
         } else {
             if (!regClients.contains(client)) {
                 RuntimeException runtimeException = new RuntimeException("Please register");
@@ -67,7 +72,7 @@ public class ClientServes {
                 throw runtimeException;
             }
         }
-        return logClients;
+        return flag;
     }
 
     public void removeClient(Client client) {
