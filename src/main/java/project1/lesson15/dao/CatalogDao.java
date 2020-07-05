@@ -4,6 +4,7 @@ package project1.lesson15.dao;
 import project1.lesson15.catalog.Catalog;
 
 import java.sql.Connection;
+import java.util.List;
 
 /**
  * CatalogDao
@@ -19,6 +20,10 @@ public interface CatalogDao {
 
     boolean deleteCatalogById(Long id);
     void renewDatabase();
+    void createTable();
+    List<Catalog> getAllCatalog();
+
+
 
     ;
 

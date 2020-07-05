@@ -4,6 +4,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.ejb.EJB;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,13 +18,12 @@ import java.sql.SQLException;
  * @author "Andrei Prokofiev"
  */
 
+@EJB
+@Myconnect
 public class ConnectionManagerJdbc implements ConnectionManager {
 
     public static final ConnectionManager INSTANCE = new ConnectionManagerJdbc();
     private static final Logger LOGGER = LogManager.getLogger(ConnectionManagerJdbc.class);
-
-    private ConnectionManagerJdbc() {
-    }
 
     public static ConnectionManager getInstance() {
         return INSTANCE;

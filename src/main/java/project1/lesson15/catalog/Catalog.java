@@ -6,20 +6,20 @@ package project1.lesson15.catalog;
  * @author "Andrei Prokofiev"
  */
 public class Catalog {
-    private Integer productId;
+    private Integer id;
     private String nameProduct;
     private Integer price;
     private String prodСountry;
 
-    public Catalog(Integer productId, String nameProduct, Integer price, String prodСountry) {
-        this.productId = productId;
+    public Catalog(Integer id, String nameProduct, Integer price, String prodСountry) {
+        this.id = id;
         this.nameProduct = nameProduct;
         this.price = price;
         this.prodСountry = prodСountry;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Integer getId() {
+        return id;
     }
 
 
@@ -44,7 +44,7 @@ public class Catalog {
     @Override
     public String toString() {
         return "Catalog{" +
-                "productId=" + productId +
+                "productId=" + id +
                 ", nameProduct='" + nameProduct + '\'' +
                 ", price=" + price +
                 ", prodСountry='" + prodСountry + '\'' +

@@ -41,6 +41,13 @@ public class Main {
         ConnectionManager connectionManager = ConnectionManagerJdbc.getInstance();
         CatalogDaoJdbc catalogDao = new CatalogDaoJdbc(connectionManager);
         catalogDao.renewDatabase();
+        System.out.println(catalogDao.getAllCatalog());
+        Catalog mobile = new Catalog(6,"computer", 1000, "China");
+        catalogDao.addCatalog(mobile);
+        System.out.println(catalogDao.getAllCatalog());
+
+
+
         Main main = new Main();
         main.method1(catalogDao);
     }
@@ -50,12 +57,12 @@ public class Main {
                 2500, "USA");
 //        LOGGER.info(tovar);
 
-        long productid = catalogDao.addCatalog(tovar);
-        tovar = catalogDao.getCatalogById(productid);
+        long id = catalogDao.addCatalog(tovar);
+        tovar = catalogDao.getCatalogById(id);
 
         tovar.setPrice(1500);
         catalogDao.updateCatalogById(tovar);
-        tovar = catalogDao.getCatalogById(productid);
+        tovar = catalogDao.getCatalogById(id);
         LOGGER.info(tovar);
 
         ClientServes clientServes = new ClientServes();
