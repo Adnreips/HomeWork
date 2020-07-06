@@ -23,12 +23,13 @@ public class CatalogServlet extends HttpServlet {
 
     @Inject
     private CatalogDao catalogDao;
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         List<Catalog> catalog = catalogDao.getAllCatalog();
+
+
         request.setAttribute("catalog", catalog);
         request.getRequestDispatcher("WEB-INF/jsp/catalog.jsp").forward(request, response);
     }

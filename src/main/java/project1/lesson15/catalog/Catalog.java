@@ -9,24 +9,33 @@ public class Catalog {
     private Integer id;
     private String nameProduct;
     private Integer price;
-    private String prodСountry;
+    private String manufacturer;
 
-    public Catalog(Integer id, String nameProduct, Integer price, String prodСountry) {
+    public Catalog() {
+    }
+
+    public Catalog(Integer id, String nameProduct, Integer price, String manufacturer) {
         this.id = id;
         this.nameProduct = nameProduct;
         this.price = price;
-        this.prodСountry = prodСountry;
+        this.manufacturer = manufacturer;
     }
 
     public Integer getId() {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNameProduct() {
         return nameProduct;
     }
 
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
+    }
 
     public Integer getPrice() {
         return price;
@@ -36,18 +45,21 @@ public class Catalog {
         this.price = price;
     }
 
-    public String getProdСountry() {
-        return prodСountry;
+    public String getManufacturer() {
+        return manufacturer;
     }
 
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
 
     @Override
     public String toString() {
         return "Catalog{" +
-                "productId=" + id +
+                "id=" + id +
                 ", nameProduct='" + nameProduct + '\'' +
                 ", price=" + price +
-                ", prodСountry='" + prodСountry + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
                 '}';
     }
 }

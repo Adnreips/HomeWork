@@ -22,12 +22,12 @@ import java.sql.SQLException;
 @Myconnect
 public class ConnectionManagerJdbc implements ConnectionManager {
 
-    public static final ConnectionManager INSTANCE = new ConnectionManagerJdbc();
+//    public static final ConnectionManager INSTANCE = new ConnectionManagerJdbc();
     private static final Logger LOGGER = LogManager.getLogger(ConnectionManagerJdbc.class);
 
-    public static ConnectionManager getInstance() {
-        return INSTANCE;
-    }
+//    public static ConnectionManager getInstance() {
+//        return INSTANCE;
+//    }
 
     @Override
     public Connection getConnection() throws IOException {
@@ -36,13 +36,14 @@ public class ConnectionManagerJdbc implements ConnectionManager {
         String url = "jdbc:postgresql://localhost:5432/customers";
 
         try {
+            Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(
                     url,
                     "root",
                     "admin1982");
             LOGGER.debug(url);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             LOGGER.throwing(Level.ERROR, e);
         }
         return connection;

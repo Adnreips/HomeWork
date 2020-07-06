@@ -38,64 +38,66 @@ public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        ConnectionManager connectionManager = ConnectionManagerJdbc.getInstance();
+        ConnectionManager connectionManager = new ConnectionManagerJdbc();
         CatalogDaoJdbc catalogDao = new CatalogDaoJdbc(connectionManager);
-        catalogDao.renewDatabase();
-        System.out.println(catalogDao.getAllCatalog());
-        Catalog mobile = new Catalog(6,"computer", 1000, "China");
-        catalogDao.addCatalog(mobile);
-        System.out.println(catalogDao.getAllCatalog());
+        catalogDao.createTable();
+        System.out.println(catalogDao.getCatalogById(2));
+//        catalogDao.renewDatabase();
+//        System.out.println(catalogDao.getAllCatalog());
+//        Catalog mobile = new Catalog(6,"computer", 1000, "China");
+//        catalogDao.addCatalog(mobile);
+//        System.out.println(catalogDao.getAllCatalog());
 
 
 
-        Main main = new Main();
-        main.method1(catalogDao);
+//        Main main = new Main();
+//        main.method1(catalogDao);
     }
 
     public void method1(CatalogDao catalogDao)  {
-        Catalog tovar = new Catalog(null, "Helicopter",
-                2500, "USA");
+//        Catalog tovar = new Catalog(null, "Helicopter",
+//                2500, "USA");
+////        LOGGER.info(tovar);
+//
+//        long id = catalogDao.addCatalog(tovar);
+//        tovar = catalogDao.getCatalogById(id);
+//
+//        tovar.setPrice(1500);
+//        catalogDao.updateCatalogById(tovar);
+//        tovar = catalogDao.getCatalogById(id);
 //        LOGGER.info(tovar);
-
-        long id = catalogDao.addCatalog(tovar);
-        tovar = catalogDao.getCatalogById(id);
-
-        tovar.setPrice(1500);
-        catalogDao.updateCatalogById(tovar);
-        tovar = catalogDao.getCatalogById(id);
-        LOGGER.info(tovar);
-
-        ClientServes clientServes = new ClientServes();
-        Client client1 = new Client("Anton", LocalDate.of(1982,01,28));
-        Client client2 = new Client("Anton", LocalDate.of(1983,01,28));
-        Client client3 = new Client("Anton", LocalDate.of(1985,01,28));
-        Client client4 = new Client("Anton", LocalDate.of(1984,01,28));
-        Client client5 = new Client(null, LocalDate.of(1982,01,28));
-
-        clientServes.doPayment();
-
-        clientServes.regClient(client1);
-        clientServes.regClient(client2);
-        try{
-            clientServes.logClient(client3);
-        }catch (RuntimeException e){
-            LOGGER.throwing(Level.WARN, e);
-        }
-
-        System.out.println("+++++++++++++++++++");
-
-        System.out.println(clientServes.getLogClients());
-
-
-        System.out.println("++++++++++++++++++");
-
-        try{
-        clientServes.regClient(client5);
-        } catch (RuntimeException e){
-            LOGGER.throwing(Level.WARN, e);
-        }
-
-        LOGGER.info(clientServes.getRegClients());
+//
+//        ClientServes clientServes = new ClientServes();
+//        Client client1 = new Client("Anton", LocalDate.of(1982,01,28));
+//        Client client2 = new Client("Anton", LocalDate.of(1983,01,28));
+//        Client client3 = new Client("Anton", LocalDate.of(1985,01,28));
+//        Client client4 = new Client("Anton", LocalDate.of(1984,01,28));
+//        Client client5 = new Client(null, LocalDate.of(1982,01,28));
+//
+//        clientServes.doPayment();
+//
+//        clientServes.regClient(client1);
+//        clientServes.regClient(client2);
+//        try{
+//            clientServes.logClient(client3);
+//        }catch (RuntimeException e){
+//            LOGGER.throwing(Level.WARN, e);
+//        }
+//
+//        System.out.println("+++++++++++++++++++");
+//
+//        System.out.println(clientServes.getLogClients());
+//
+//
+//        System.out.println("++++++++++++++++++");
+//
+//        try{
+//        clientServes.regClient(client5);
+//        } catch (RuntimeException e){
+//            LOGGER.throwing(Level.WARN, e);
+//        }
+//
+//        LOGGER.info(clientServes.getRegClients());
 
 
 

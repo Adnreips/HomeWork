@@ -12,19 +12,17 @@ import java.util.List;
  * @author "Andrei Prokofiev"
  */
 public interface CatalogDao {
-    Long addCatalog(Catalog catalog);
 
-    Catalog getCatalogById(Long id);
+    Catalog getCatalogById(Integer id);
 
-    boolean updateCatalogById(Catalog catalog);
-
-    boolean deleteCatalogById(Long id);
-    void renewDatabase();
     void createTable();
+
     List<Catalog> getAllCatalog();
+//    boolean updateCatalogById(Catalog catalog);
 
+//    boolean deleteCatalogById(Long id);
+//    void renewDatabase();
+//    Long addCatalog(Catalog catalog);
 
-
-    ;
 
 }
