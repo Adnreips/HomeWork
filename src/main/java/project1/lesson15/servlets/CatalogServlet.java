@@ -28,9 +28,11 @@ public class CatalogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Catalog> catalog = catalogDao.getAllCatalog();
-
-
         request.setAttribute("catalog", catalog);
-        request.getRequestDispatcher("WEB-INF/jsp/catalog.jsp").forward(request, response);
+        request.setAttribute("PageTitle", "Catalog");
+        request.setAttribute("PageBody", "catalog.jsp");
+//        request.getRequestDispatcher("WEB-INF/jsp/catalog.jsp").forward(request, response);
+        request.getRequestDispatcher("/layout.jsp")
+                .forward(request, response);
     }
 }

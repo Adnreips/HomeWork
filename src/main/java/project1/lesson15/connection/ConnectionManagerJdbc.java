@@ -39,7 +39,7 @@ public class ConnectionManagerJdbc implements ConnectionManager {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(
                     url,
-                    "root",
+                    "postgres",
                     "admin1982");
             LOGGER.debug(url);
 

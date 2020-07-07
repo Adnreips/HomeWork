@@ -32,11 +32,21 @@ public class ShowCatalogServlet extends HttpServlet {
         Catalog tovar = catalogDao.getCatalogById(Integer.valueOf(tovarId));
         if (tovar == null) {
             response.setStatus(404);
-            request.getRequestDispatcher("WEB-INF/jsp/notfound.jsp").forward(request, response);
+//            request.getRequestDispatcher("WEB-INF/jsp/notfound.jsp").forward(request, response);
+            request.setAttribute("PageTitle", "Tovar");
+            request.setAttribute("PageBody", "notfound.jsp");
+            request.getRequestDispatcher("/layout.jsp")
+                    .forward(request, response);
+
             return;
         }
 
+//        request.setAttribute("model", tovar);
+//        request.getRequestDispatcher("WEB-INF/jsp/showcatalog.jsp").forward(request, response);
         request.setAttribute("model", tovar);
-        request.getRequestDispatcher("WEB-INF/jsp/showcatalog.jsp").forward(request, response);
+        request.setAttribute("PageTitle", "Tovar");
+        request.setAttribute("PageBody", "showcatalog.jsp");
+        request.getRequestDispatcher("/layout.jsp")
+                .forward(request, response);
     }
 }

@@ -7,8 +7,8 @@
     <groupId>adnreips</groupId>
     <artifactId>HomeWorkNew</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>cdi-servlet-example Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+<!--    <name>cdi-servlet-example Maven Webapp</name>-->
+<!--    <url>http://maven.apache.org</url>-->
 
     <dependencies>
         <dependency>
@@ -107,15 +107,15 @@
                     <attachClasses>true</attachClasses>
                 </configuration>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-surefire-plugin</artifactId>-->
-<!--                <version>3.0.0-M5</version>-->
-<!--                <configuration>-->
-<!--                    <skipTests>true</skipTests>-->
-<!--                </configuration>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
 
-<!--            </plugin>-->
+            </plugin>
         </plugins>
 
     </build>

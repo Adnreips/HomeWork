@@ -41,10 +41,10 @@ public class CatalogDaoJdbc implements CatalogDao {
             + "\n"
             + "INSERT INTO catalog (nameProduct, price, manufacturer)\n"
             + "VALUES\n"
-            + "   ('P1', 100, 'China'),\n"
-            + "   ('EDGE', 1150, 'China'),\n"
-            + "   ('FRY1', 1001, 'China'),\n"
-            + "   ('OGO', 10000, 'China');"
+            + "   (' Рhone P1', 100, 'China'),\n"
+            + "   (' Рhone EDGE', 1150, 'China'),\n"
+            + "   (' Рhone FRY1', 1001, 'China'),\n"
+            + "   (' Рhone OGO', 10000, 'China');"
             + "\n";
 
     private final ConnectionManager connectionManager;
