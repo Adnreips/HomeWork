@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author "Andrei Prokofiev"
  */
-@WebServlet(urlPatterns = "/", name = "Catalog")
+@WebServlet(urlPatterns = "/catalog")
 public class CatalogServlet extends HttpServlet {
 
     @Inject

@@ -29,11 +29,11 @@ public class ShowCatalogServlet extends HttpServlet {
             throw new ServletException("Missing parameter id");
         }
 
-        Catalog tovar = catalogDao.getCatalogById(Integer.valueOf(tovarId));
-        if (tovar == null) {
+        Catalog product = catalogDao.getCatalogById(Integer.valueOf(tovarId));
+        if (product == null) {
             response.setStatus(404);
 //            request.getRequestDispatcher("WEB-INF/jsp/notfound.jsp").forward(request, response);
-            request.setAttribute("PageTitle", "Tovar");
+            request.setAttribute("PageTitle", "Product");
             request.setAttribute("PageBody", "notfound.jsp");
             request.getRequestDispatcher("/layout.jsp")
                     .forward(request, response);
@@ -41,10 +41,10 @@ public class ShowCatalogServlet extends HttpServlet {
             return;
         }
 
-//        request.setAttribute("model", tovar);
+//        request.setAttribute("model", product);
 //        request.getRequestDispatcher("WEB-INF/jsp/showcatalog.jsp").forward(request, response);
-        request.setAttribute("model", tovar);
-        request.setAttribute("PageTitle", "Tovar");
+        request.setAttribute("model", product);
+        request.setAttribute("PageTitle", "Product");
         request.setAttribute("PageBody", "showcatalog.jsp");
         request.getRequestDispatcher("/layout.jsp")
                 .forward(request, response);

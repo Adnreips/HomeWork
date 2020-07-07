@@ -55,33 +55,33 @@ public class CatalogDaoJdbc implements CatalogDao {
         createTable();
     }
 
-//    @Override
-//    public Long addCatalog(Catalog catalog) {
-//        try (Connection connection = connectionManager.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(
-//                     INSERT_INTO_CATALOG, Statement.RETURN_GENERATED_KEYS)) {
-//            preparedStatement.setString(1, catalog.getNameProduct());
-//            preparedStatement.setInt(2, catalog.getPrice());
-//            preparedStatement.setString(3, catalog
-//                    .getProdСountry());
-//
-//            LOGGER.log(Level.DEBUG, "SQL add {}", INSERT_INTO_CATALOG);
-//
-//            preparedStatement.executeUpdate();
-//
-//            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-//                if (generatedKeys.next()) {
-//                    return generatedKeys.getLong(1);
-//                }
-//            }
-//
-//        } catch (SQLException e) {
-//            LOGGER.throwing(Level.ERROR, e);
-//        } catch (IOException e) {
-//            LOGGER.throwing(Level.ERROR, e);
-//        }
-//        return 0L;
-//    }
+    @Override
+    public Integer addCatalog(Catalog catalog) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     INSERT_INTO_CATALOG, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, catalog.getNameProduct());
+            preparedStatement.setInt(2, catalog.getPrice());
+            preparedStatement.setString(3, catalog
+                    .getManufacturer());
+
+            LOGGER.log(Level.DEBUG, "SQL add {}", INSERT_INTO_CATALOG);
+
+            preparedStatement.executeUpdate();
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                }
+            }
+
+        } catch (SQLException e) {
+            LOGGER.throwing(Level.ERROR, e);
+        } catch (IOException e) {
+            LOGGER.throwing(Level.ERROR, e);
+        }
+        return 0;
+    }
 
     @Override
     public Catalog getCatalogById(Integer id) {

@@ -24,4 +24,4 @@
 
 <br>
 
-<a href='/'> <- Go back to catalogs list</a>
+<%--<a href='/'> <- Go back to catalogs list</a>--%>

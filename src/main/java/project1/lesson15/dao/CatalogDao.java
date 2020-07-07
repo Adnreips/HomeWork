@@ -22,7 +22,7 @@ public interface CatalogDao {
 
 //    boolean deleteCatalogById(Long id);
 //    void renewDatabase();
-//    Long addCatalog(Catalog catalog);
+    Integer addCatalog(Catalog catalog);
 
 
 }
