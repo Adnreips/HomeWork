@@ -53,6 +53,8 @@ public class CatalogDaoJdbc implements CatalogDao {
     public CatalogDaoJdbc(@Myconnect ConnectionManager connectionManager) {
                 this.connectionManager = connectionManager;
         createTable();
+        renewDatabase();
+
     }
 
     @Override
@@ -137,67 +139,67 @@ public class CatalogDaoJdbc implements CatalogDao {
 //        return false;
 //    }
 
-//    @Override
-//    public boolean deleteCatalogById(Long id) {
-//        try (Connection connection = connectionManager.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_CATALOG)) {
-//            preparedStatement.setLong(1, id);
-//            LOGGER.log(Level.DEBUG, "SQL deleteCatalogById {}", DELETE_FROM_CATALOG);
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            LOGGER.throwing(Level.ERROR, e);
-//            return false;
-//        } catch (IOException e) {
-//            LOGGER.throwing(Level.ERROR, e);
-//        }
-//        return true;
-//    }
+    @Override
+    public boolean deleteCatalogById(Integer id) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_CATALOG)) {
+            preparedStatement.setInt(1, id);
+            LOGGER.log(Level.DEBUG, "SQL deleteCatalogById {}", DELETE_FROM_CATALOG);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.throwing(Level.ERROR, e);
+            return false;
+        } catch (IOException e) {
+            LOGGER.throwing(Level.ERROR, e);
+        }
+        return true;
+    }
 
 
-//    @Override
-//    public void renewDatabase() {
-//        try (Connection connection = connectionManager.getConnection();
-//             Statement statement = connection.createStatement();
-//        ) {
-//            statement.execute("-- Database: customers\n"
-//                    + "DROP TABLE IF EXISTS clients ;"
-//                    + "\n"
-//                    + "CREATE TABLE clients (\n"
-//                    + "    clientId bigserial primary key,\n"
-//                    + "    name varchar(100) NOT NULL);"
-//                    + "\n"
-//                    + "INSERT INTO clients (name)\n"
-//                    + "VALUES\n"
-//                    + "('Andrey');"
-//                    + "\n"
-//                    + "DROP TABLE IF EXISTS orderNew ;"
-//                    + "\n"
-//                    + "CREATE TABLE orderNew (\n"
-//                    + "    clientId bigserial primary key,\n"
-//                    + "    orderId integer NOT NULL,\n"
-//                    + "    id integer NOT NULL,\n"
-//                    + "    dateOrder integer NOT NULL);"
-//                    + "\n"
-//                    + "INSERT INTO orderNew (orderId, id, dateOrder)\n"
-//                    + "VALUES\n"
-//                    + "   (100, 1, 20200608);"
-//                    + "DROP TABLE IF EXISTS APP_LOGS ;"
-////                    + "\n"
-//                    + "CREATE TABLE APP_LOGS (\n"
-//                    + "    LOG_ID varchar(100),\n"
-//                    + "    ENTRY_DATE varchar(100),\n"
-//                    + "    LOGGER varchar(100),\n"
-//                    + "    LOG_LEVEL varchar(100),\n"
-//                    + "    MESSAGE varchar(100),\n"
-//                    + "    EXCEPTION varchar(100));"
-//                    + "\n"
-//                    + ";");
-//            LOGGER.debug("SQL after creat table");
-//
-//        } catch (SQLException | IOException e) {
-//            LOGGER.throwing(Level.ERROR, e);
-//        }
-//    }
+    @Override
+    public void renewDatabase() {
+        try (Connection connection = connectionManager.getConnection();
+             Statement statement = connection.createStatement();
+        ) {
+            statement.execute("-- Database: customers\n"
+                    + "DROP TABLE IF EXISTS clients ;"
+                    + "\n"
+                    + "CREATE TABLE clients (\n"
+                    + "    clientId bigserial primary key,\n"
+                    + "    name varchar(100) NOT NULL);"
+                    + "\n"
+                    + "INSERT INTO clients (name)\n"
+                    + "VALUES\n"
+                    + "('Andrey');"
+                    + "\n"
+                    + "DROP TABLE IF EXISTS orderNew ;"
+                    + "\n"
+                    + "CREATE TABLE orderNew (\n"
+                    + "    clientId bigserial primary key,\n"
+                    + "    orderId integer NOT NULL,\n"
+                    + "    id integer NOT NULL,\n"
+                    + "    dateOrder integer NOT NULL);"
+                    + "\n"
+                    + "INSERT INTO orderNew (orderId, id, dateOrder)\n"
+                    + "VALUES\n"
+                    + "   (100, 1, 20200608);"
+                    + "DROP TABLE IF EXISTS APP_LOGS ;"
+                    + "\n"
+                    + "CREATE TABLE APP_LOGS (\n"
+                    + "    LOG_ID varchar(100),\n"
+                    + "    ENTRY_DATE varchar(100),\n"
+                    + "    LOGGER varchar(100),\n"
+                    + "    LOG_LEVEL varchar(100),\n"
+                    + "    MESSAGE varchar(100),\n"
+                    + "    EXCEPTION varchar(100));"
+                    + "\n"
+                    + ";");
+            LOGGER.debug("SQL after creat table");
+
+        } catch (SQLException | IOException e) {
+            LOGGER.throwing(Level.ERROR, e);
+        }
+    }
 
     @Override
     public void createTable() {

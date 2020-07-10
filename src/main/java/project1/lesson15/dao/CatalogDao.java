@@ -20,8 +20,8 @@ public interface CatalogDao {
     List<Catalog> getAllCatalog();
 //    boolean updateCatalogById(Catalog catalog);
 
-//    boolean deleteCatalogById(Long id);
-//    void renewDatabase();
+  boolean deleteCatalogById(Integer id);
+    void renewDatabase();
     Integer addCatalog(Catalog catalog);
 
 

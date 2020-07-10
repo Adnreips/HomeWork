@@ -43,7 +43,7 @@ public class ShowCatalogServlet extends HttpServlet {
 
 //        request.setAttribute("model", product);
 //        request.getRequestDispatcher("WEB-INF/jsp/showcatalog.jsp").forward(request, response);
-        request.setAttribute("model", product);
+        request.setAttribute("product", product);
         request.setAttribute("PageTitle", "Product");
         request.setAttribute("PageBody", "showcatalog.jsp");
         request.getRequestDispatcher("/layout.jsp")

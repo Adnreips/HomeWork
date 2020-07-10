@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
 <%@ page contentType="text/html;charset=utf-8" %>
 <%--<html>--%>
 <%--<body>--%>
@@ -10,10 +10,10 @@
 <%--    <li>Manufacturer - ${model.manufacturer}</li>--%>
 <%--</ul>    --%>
 <ul class="list-group">
-    <li class="list-group-item">${model.id}</li>
-    <li class="list-group-item">${model.nameProduct}</li>
-    <li class="list-group-item">${model.price}</li>
-    <li class="list-group-item">${model.manufacturer}</li>
+    <li class="list-group-item">${product.id}</li>
+    <li class="list-group-item">${product.nameProduct}</li>
+    <li class="list-group-item">${product.price}</li>
+    <li class="list-group-item">${product.manufacturer}</li>
 </ul>
 
 <%--</body>--%>

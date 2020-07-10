@@ -3,14 +3,15 @@
 
 <jsp:useBean id="product" class="project1.lesson15.catalog.Catalog" />
     <c:set target="${product}" property="nameProduct" value="FIRST" />
-    <jsp:setProperty name="product" property="price" value="0" />
+    <c:set target="${product}" property="price" value="0"/>
+<%--    <jsp:setProperty name="product" property="price" value="0" />--%>
 
 
 <h1>Adding a new product</h1>
 <form method="post" action="${pageContext.request.contextPath}/addproduct" autocomplete="off">
     <div class="form-group">
-        <label for="model">NameProduct</label>
-        <input name="nameProduct" type="text" class="form-control" id="model" value="<jsp:getProperty name="product" property="nameProduct" />">
+        <label for="product">NameProduct</label>
+        <input name="nameProduct" type="text" class="form-control" id="product" value="<jsp:getProperty name="product" property="nameProduct" />">
     </div>
     <div class="form-group">
         <label for="price">Price</label>
@@ -20,6 +21,20 @@
         <label for="manufacturer">Manufacturer</label>
         <input name="manufacturer" type="text" class="form-control" id="manufacturer" value="<jsp:getProperty name="product" property="manufacturer" />">
     </div>
+<%--<table cellspacing="5" cellpadding="5" border="1">--%>
+<%--    <tr>--%>
+<%--        <td align="right">Name Product:</td>--%>
+<%--        <td>${product.nameProduct}</td>--%>
+<%--    </tr>--%>
+<%--    <tr>--%>
+<%--        <td align="right">Price:</td>--%>
+<%--        <td>${product.price}</td>--%>
+<%--    </tr>--%>
+<%--    <tr>--%>
+<%--        <td align="right">Manufacturer:</td>--%>
+<%--        <td>${product.manufacturer}</td>--%>
+<%--    </tr>--%>
+<%--</table>--%>
     <button type="submit" class="btn btn-primary">Submit</button>
-</form>
 
+</form>

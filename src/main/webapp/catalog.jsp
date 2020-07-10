@@ -17,6 +17,7 @@
             <td>${catalog.price}</td>
             <td>${catalog.manufacturer}</td>
             <td><a href="${pageContext.request.contextPath}/showcatalog?id=${catalog.id}">Link</a></td>
+            <td><a href="${pageContext.request.contextPath}/deletproduct?id=${catalog.id}">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>
@@ -24,4 +25,4 @@
 
 <br>
 
-<%--<a href='/'> <- Go back to catalogs list</a>--%>
+<a href='/addproduct'> <- Go add new product</a>
