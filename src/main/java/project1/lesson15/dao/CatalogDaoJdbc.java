@@ -4,6 +4,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import project1.lesson15.catalog.Catalog;
+import project1.lesson15.client.Client;
 import project1.lesson15.connection.ConnectionManager;
 import project1.lesson15.connection.Myconnect;
 
@@ -29,8 +30,11 @@ public class CatalogDaoJdbc implements CatalogDao {
     public static final String UPDATE_CATALOG = "UPDATE catalog SET nameproduct=?, price=?, prodСountry=? WHERE id=?";
     public static final String DELETE_FROM_CATALOG = "DELETE FROM catalog WHERE id=?";
     public static final String INSERT_INTO_CATALOG = "INSERT INTO catalog values (DEFAULT, ?, ?, ?)";
+    public static final String INSERT_INTO_CLIENTS = "INSERT INTO clients values (DEFAULT, ?, ?, ?)";
     public static final String SELECT_FROM_CATALOG = "SELECT * FROM catalog WHERE id = ?";
-    public static final  String SELECT_ALL_FROM_CATALOG = "SELECT * FROM catalog";
+    public static final String SELECT_ALL_FROM_CATALOG = "SELECT * FROM catalog";
+    public static final String SELECT_ALL_FROM_CLIENTS = "SELECT * FROM clients";
+
     public static final String CREATE_TABLE_CATALOG = "DROP TABLE IF EXISTS catalog ;"
             + "\n"
             + "CREATE TABLE catalog (\n"
@@ -47,14 +51,28 @@ public class CatalogDaoJdbc implements CatalogDao {
             + "   (' Рhone OGO', 10000, 'China');"
             + "\n";
 
+    public static final String CREATE_TABLE_CLIENTS = "DROP TABLE IF EXISTS clients ;"
+            + "\n"
+            + "CREATE TABLE clients (\n"
+            + "    id bigserial primary key,\n"
+            + "    name varchar(100),\n"
+            + "    password varchar(100),\n"
+            + "    birthDate date);"
+            + "\n"
+            + "INSERT INTO clients (name, password, birthDate)\n"
+            + "VALUES\n"
+            + "   ('Adnrei', '1', '1994-04-01'),\n"
+            + "   ('Adnrei1', '1', '1994-04-01'),\n"
+            + "   ('Adnrei3', '1', '1992-01-01');"
+            + "\n";
+
     private final ConnectionManager connectionManager;
 
     @Inject
     public CatalogDaoJdbc(@Myconnect ConnectionManager connectionManager) {
-                this.connectionManager = connectionManager;
+        this.connectionManager = connectionManager;
         createTable();
-        renewDatabase();
-
+        creatTableClients();
     }
 
     @Override
@@ -83,6 +101,102 @@ public class CatalogDaoJdbc implements CatalogDao {
             LOGGER.throwing(Level.ERROR, e);
         }
         return 0;
+    }
+
+    @Override
+    public void creatTableClients() {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_TABLE_CLIENTS)) {
+            preparedStatement.execute();
+        } catch (SQLException | IOException e) {
+            LOGGER.error("Some thing wrong in creatTableClients method", e);
+        }
+
+    }
+
+    @Override
+    public void createTable() {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_TABLE_CATALOG)) {
+            preparedStatement.execute();
+        } catch (SQLException | IOException e) {
+            LOGGER.error("Some thing wrong in createTable method", e);
+        }
+    }
+
+    @Override
+    public Integer addTableClients(Client client) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     INSERT_INTO_CLIENTS, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, client.getName());
+            preparedStatement.setString(2, client.getPassword());
+            preparedStatement.setDate(3, Date.valueOf(client.getBirthDate()));
+
+            LOGGER.log(Level.DEBUG, "SQL add {}", INSERT_INTO_CLIENTS);
+
+            preparedStatement.executeUpdate();
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                }
+            }
+
+        } catch (SQLException e) {
+            LOGGER.throwing(Level.ERROR, e);
+        } catch (IOException e) {
+            LOGGER.throwing(Level.ERROR, e);
+        }
+        return 0;
+    }
+
+    @Override
+    public Client getClientById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public List<Client> getAllClietns() {
+        List<Client> lstmb = new ArrayList<>();
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_FROM_CLIENTS);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                lstmb.add(new Client(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4)));
+            }
+            return lstmb;
+        } catch (SQLException | IOException e) {
+            LOGGER.error("Some thing wrong in getMobileById method", e);
+        }
+        return new ArrayList<>();
+
+    }
+
+    @Override
+    public List<Catalog> getAllCatalog() {
+        List<Catalog> lstmb = new ArrayList<>();
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_FROM_CATALOG);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                lstmb.add(new Catalog(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getInt(3),
+                        resultSet.getString(4)));
+            }
+            return lstmb;
+        } catch (SQLException | IOException e) {
+            LOGGER.error("Some thing wrong in getMobileById method", e);
+        }
+        return new ArrayList<>();
     }
 
     @Override
@@ -200,35 +314,17 @@ public class CatalogDaoJdbc implements CatalogDao {
             LOGGER.throwing(Level.ERROR, e);
         }
     }
-
-    @Override
-    public void createTable() {
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_TABLE_CATALOG)) {
-            preparedStatement.execute();
-        } catch (SQLException | IOException e) {
-            LOGGER.error("Some thing wrong in createTable method", e);
-        }
-    }
-
-    @Override
-    public List<Catalog> getAllCatalog() {
-        List<Catalog> lstmb = new ArrayList<>();
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_FROM_CATALOG);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-
-            while (resultSet.next()) {
-                lstmb.add(new Catalog(
-                        resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getInt(3),
-                        resultSet.getString(4)));
+    public boolean isExist(String name, String password) {
+        for (Client user : getAllClietns()) {
+            if (user.getName().equals(name) &&
+                    user.getPassword().equals(password)) {
+                return true;
             }
-            return lstmb;
-        } catch (SQLException | IOException e) {
-            LOGGER.error("Some thing wrong in getMobileById method", e);
         }
-        return new ArrayList<>();
+
+        return false;
     }
+
+
+
 }

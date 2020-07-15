@@ -29,9 +29,9 @@ public class ClientServes {
 
     public ClientServes() {
         this.regClients = new ArrayList<>();
-        Client user = new Client("Andrei", "1", LocalDate.parse("1994-02-02"));
-        Client user1 = new Client("Andrei1", "1", LocalDate.parse("1994-02-02"));
-        Client user2 = new Client("Andrei2", "1", LocalDate.parse("1994-02-02"));
+        Client user = new Client(1,"Andrei", "1", "1994-02-02");
+        Client user1 = new Client(1,"Andrei1", "1", "1994-02-02");
+        Client user2 = new Client(1,"Andrei2", "1", "1994-02-02");
         regClients.add(user);
         regClients.add(user1);
         regClients.add(user2);

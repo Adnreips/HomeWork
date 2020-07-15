@@ -1,7 +1,10 @@
 package project1.lesson15.servlets;
 
 import project1.lesson15.client.ClientServes;
+import project1.lesson15.connection.ConnectionManager;
+import project1.lesson15.connection.ConnectionManagerJdbc;
 import project1.lesson15.dao.CatalogDao;
+import project1.lesson15.dao.CatalogDaoJdbc;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -19,16 +22,16 @@ import java.io.IOException;
  */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-
     private ClientServes clientServes;
-
+    private ConnectionManager connectionManager;
 
     @Inject
     private CatalogDao catalogDao;
 
     @Override
     public void init() throws ServletException {
-        this.clientServes = new ClientServes();
+        this.connectionManager = new ConnectionManagerJdbc();
+        this.catalogDao = new CatalogDaoJdbc(connectionManager);
     }
 
     @Override
@@ -41,10 +44,8 @@ public class LoginServlet extends HttpServlet {
         // вытаскиваем из запроса имя пользователя и его пароль
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-
-        System.out.println("======================");
         // если пользователь есть в системе
-        if (clientServes.isExist(name, password)) {
+        if (catalogDao.isExist(name, password)) {
 
             // создаем для него сессию
             HttpSession session = req.getSession();
@@ -52,11 +53,11 @@ public class LoginServlet extends HttpServlet {
             // кладем в атрибуты сессии атрибут user с именем пользователя
             session.setAttribute("user", name);
             session.setMaxInactiveInterval(-1);
-            System.out.println("++++++++++++++++++++");
 
             req.getServletContext().getRequestDispatcher("/catalog").forward(req, resp);
         } else {
-            resp.sendRedirect(req.getContextPath() + "/login");
+//            resp.sendRedirect(req.getContextPath() + "/login");
+            doGet(req, resp);
         }
 
     }

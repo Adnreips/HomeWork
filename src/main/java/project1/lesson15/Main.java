@@ -39,25 +39,13 @@ public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-//        ConnectionManager connectionManager = new ConnectionManagerJdbc();
-//        CatalogDaoJdbc catalogDao = new CatalogDaoJdbc(connectionManager);
-//        catalogDao.createTable();
-//        System.out.println(catalogDao.getCatalogById(2));
-//        catalogDao.renewDatabase();
-//        System.out.println(catalogDao.getAllCatalog());
-//        Catalog mobile = new Catalog(6,"computer", 1000, "China");
-//        catalogDao.addCatalog(mobile);
-//        System.out.println(catalogDao.getAllCatalog());
-        ClientServes clientServes = new ClientServes();
-        List<Client> clients = clientServes.regClients;
-        System.out.println(clients);
-
-        System.out.println(clientServes.isExist("Marsel","qwerty007"));
-
-
-
-//        Main main = new Main();
-//        main.method1(catalogDao);
+        ConnectionManager connectionManager = new ConnectionManagerJdbc();
+        CatalogDaoJdbc catalogDao = new CatalogDaoJdbc(connectionManager);
+        catalogDao.creatTableClients();
+        catalogDao.createTable();
+        Client client = new Client(1,"Anton","1", "1994-02-02");
+        catalogDao.addTableClients(client);
+//
     }
 
     public void method1(CatalogDao catalogDao)  {

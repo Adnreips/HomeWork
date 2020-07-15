@@ -9,14 +9,24 @@ import java.util.Objects;
  * @author "Andrei Prokofiev"
  */
 public class Client {
-    public String name;
+    protected Integer id;
+    protected String name;
     private String password;
-    public LocalDate birthDate;
+    protected String birthDate;
 
-    public Client(String name, String password, LocalDate birthDate) {
+    public Client(Integer id, String name, String password, String birthDate) {
+        this.id = id;
         this.name = name;
         this.password = password;
         this.birthDate = birthDate;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -35,11 +45,11 @@ public class Client {
         this.password = password;
     }
 
-    public LocalDate getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -48,20 +58,22 @@ public class Client {
         if (this == o) return true;
         if (!(o instanceof Client)) return false;
         Client client = (Client) o;
-        return Objects.equals(getName(), client.getName()) &&
+        return Objects.equals(getId(), client.getId()) &&
+                Objects.equals(getName(), client.getName()) &&
                 Objects.equals(getPassword(), client.getPassword()) &&
                 Objects.equals(getBirthDate(), client.getBirthDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getPassword(), getBirthDate());
+        return Objects.hash(getId(), getName(), getPassword(), getBirthDate());
     }
 
     @Override
     public String toString() {
         return "Client{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", birthDate=" + birthDate +
                 '}';

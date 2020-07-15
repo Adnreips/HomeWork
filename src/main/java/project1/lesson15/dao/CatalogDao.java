@@ -2,8 +2,8 @@ package project1.lesson15.dao;
 
 
 import project1.lesson15.catalog.Catalog;
+import project1.lesson15.client.Client;
 
-import java.sql.Connection;
 import java.util.List;
 
 /**
@@ -20,9 +20,20 @@ public interface CatalogDao {
     List<Catalog> getAllCatalog();
 //    boolean updateCatalogById(Catalog catalog);
 
-  boolean deleteCatalogById(Integer id);
+    boolean deleteCatalogById(Integer id);
+
     void renewDatabase();
+
     Integer addCatalog(Catalog catalog);
 
+    void creatTableClients();
+
+    Integer addTableClients(Client client);
+
+    Client getClientById(Integer id);
+
+    List<Client> getAllClietns();
+
+    boolean isExist(String name, String password);
 
 }

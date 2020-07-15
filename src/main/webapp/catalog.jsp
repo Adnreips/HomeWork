@@ -19,8 +19,8 @@
             <td>${catalog.nameProduct}</td>
             <td>${catalog.price}</td>
             <td>${catalog.manufacturer}</td>
-            <td><a href="${pageContext.request.contextPath}catalog/showcatalog?id=${catalog.id}">Link</a></td>
-            <td><a href="${pageContext.request.contextPath}catalog/deletproduct?id=${catalog.id}">Delete</a></td>
+            <td><a href="${pageContext.request.contextPath}/catalog/showcatalog?id=${catalog.id}">Link</a></td>
+            <td><a href="${pageContext.request.contextPath}/catalog/deletproduct?id=${catalog.id}">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>

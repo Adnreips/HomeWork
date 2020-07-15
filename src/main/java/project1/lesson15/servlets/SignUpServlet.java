@@ -2,7 +2,10 @@ package project1.lesson15.servlets;
 
 import project1.lesson15.client.Client;
 import project1.lesson15.client.ClientServes;
+import project1.lesson15.connection.ConnectionManager;
+import project1.lesson15.connection.ConnectionManagerJdbc;
 import project1.lesson15.dao.CatalogDao;
+import project1.lesson15.dao.CatalogDaoJdbc;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -23,20 +26,22 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/signup")
 public class SignUpServlet extends HttpServlet {
-    private ClientServes clientServes;
 
+    private ConnectionManager connectionManager;
 
     @Inject
     private CatalogDao catalogDao;
 
     @Override
     public void init() throws ServletException {
-        this.clientServes = new ClientServes();
+//        this.clientServes = new ClientServes();
+        this.connectionManager = new ConnectionManagerJdbc();
+        this.catalogDao = new CatalogDaoJdbc(connectionManager);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Client> clients = clientServes.regClients;
+        List<Client> clients = catalogDao.getAllClietns();
         req.setAttribute("usersFromServer", clients);
         RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/signup.jsp");
         dispatcher.forward(req, resp);    }
@@ -46,10 +51,10 @@ public class SignUpServlet extends HttpServlet {
         // вытащили данные регистрации
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-        LocalDate birthDate = LocalDate.parse(req.getParameter("birthDate"));
+        String birthDate = req.getParameter("birthDate");
         // создали пользователя и сохранили его в хранилище
-        Client user = new Client(name, password, birthDate);
-        clientServes.regClient(user);
+        Client user = new Client(0,name, password, birthDate);
+        catalogDao.addTableClients(user);
 
         doGet(req, resp);
     }
