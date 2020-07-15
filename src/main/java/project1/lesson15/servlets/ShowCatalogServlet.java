@@ -16,7 +16,7 @@ import java.io.IOException;
  *
  * @author "Andrei Prokofiev"
  */
-@WebServlet(urlPatterns = "/showcatalog")
+@WebServlet(urlPatterns = "/catalog/showcatalog")
 public class ShowCatalogServlet extends HttpServlet {
 
     @Inject

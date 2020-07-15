@@ -39,9 +39,9 @@ class ClientServesTest {
     public void setUp() {
 //        initMocks(this);
         clientServes = spy(new ClientServes());
-        client = spy(new Client("Anton", LocalDate.of(1982, 01, 28)));
-        client1 = spy(new Client("Anton", LocalDate.of(1983, 01, 28)));
-        client2 = spy(new Client(null, LocalDate.of(1983, 01, 28)));
+        client = spy(new Client("Anton","", LocalDate.of(1982, 01, 28)));
+        client1 = spy(new Client("Anton","", LocalDate.of(1983, 01, 28)));
+        client2 = spy(new Client(null,"", LocalDate.of(1983, 01, 28)));
 
         clientServes.regClient(client);
         clientServes.logClient(client);

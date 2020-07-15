@@ -8,7 +8,7 @@
 
 
 <h1>Adding a new product</h1>
-<form method="post" action="${pageContext.request.contextPath}/addproduct" autocomplete="off">
+<form method="post" action="${pageContext.request.contextPath}/catalog/addproduct" autocomplete="off">
     <div class="form-group">
         <label for="product">NameProduct</label>
         <input name="nameProduct" type="text" class="form-control" id="product" value="<jsp:getProperty name="product" property="nameProduct" />">

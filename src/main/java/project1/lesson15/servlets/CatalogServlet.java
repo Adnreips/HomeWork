@@ -35,4 +35,10 @@ public class CatalogServlet extends HttpServlet {
         request.getRequestDispatcher("/layout.jsp")
                 .forward(request, response);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        doGet(request, response);
+    }
 }

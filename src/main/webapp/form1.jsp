@@ -3,7 +3,7 @@
 
 
 <h1>Delete product?</h1>
-<form method="post" action="${pageContext.request.contextPath}/deletproduct" autocomplete="off">
+<form method="post" action="${pageContext.request.contextPath}/catalog/deletproduct" autocomplete="off">
         <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

@@ -15,7 +15,7 @@ import java.io.IOException;
  *
  * @author "Andrei Prokofiev"
  */
-@WebServlet(urlPatterns = "/deletproduct")
+@WebServlet(urlPatterns = "/catalog/deletproduct")
 public class DeletCatalogServlet extends HttpServlet {
     @Inject
     private CatalogDao catalogDao;

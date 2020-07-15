@@ -1,10 +1,5 @@
 package project1.lesson15.client;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -15,20 +10,13 @@ import java.util.Objects;
  */
 public class Client {
     public String name;
-    public LocalDate dateOfBirth;
+    private String password;
+    public LocalDate birthDate;
 
-
-    public Client( String name, LocalDate clientID) {
-        this.dateOfBirth = clientID;
+    public Client(String name, String password, LocalDate birthDate) {
         this.name = name;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        this.password = password;
+        this.birthDate = birthDate;
     }
 
     public String getName() {
@@ -39,13 +27,20 @@ public class Client {
         this.name = name;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
-    @Override
-    public String toString() {
-        return "Client{" +
-                "name='" + name + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                '}';
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     @Override
@@ -53,12 +48,22 @@ public class Client {
         if (this == o) return true;
         if (!(o instanceof Client)) return false;
         Client client = (Client) o;
-        return dateOfBirth.equals(client.dateOfBirth) &&
-                name.equals(client.name);
+        return Objects.equals(getName(), client.getName()) &&
+                Objects.equals(getPassword(), client.getPassword()) &&
+                Objects.equals(getBirthDate(), client.getBirthDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dateOfBirth, name);
+        return Objects.hash(getName(), getPassword(), getBirthDate());
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", birthDate=" + birthDate +
+                '}';
     }
 }

@@ -16,6 +16,7 @@ import project1.lesson15.dao.CatalogDaoJdbc;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Main
@@ -38,15 +39,20 @@ public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        ConnectionManager connectionManager = new ConnectionManagerJdbc();
-        CatalogDaoJdbc catalogDao = new CatalogDaoJdbc(connectionManager);
-        catalogDao.createTable();
-        System.out.println(catalogDao.getCatalogById(2));
+//        ConnectionManager connectionManager = new ConnectionManagerJdbc();
+//        CatalogDaoJdbc catalogDao = new CatalogDaoJdbc(connectionManager);
+//        catalogDao.createTable();
+//        System.out.println(catalogDao.getCatalogById(2));
 //        catalogDao.renewDatabase();
 //        System.out.println(catalogDao.getAllCatalog());
 //        Catalog mobile = new Catalog(6,"computer", 1000, "China");
 //        catalogDao.addCatalog(mobile);
 //        System.out.println(catalogDao.getAllCatalog());
+        ClientServes clientServes = new ClientServes();
+        List<Client> clients = clientServes.regClients;
+        System.out.println(clients);
+
+        System.out.println(clientServes.isExist("Marsel","qwerty007"));
 
 
 
