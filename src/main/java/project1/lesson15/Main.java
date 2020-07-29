@@ -46,10 +46,6 @@ public class Main {
         Client client = new Client(1,"Anton","1", "1994-02-02");
         catalogDao.addTableClients(client);
 
-
-
-
-//
     }
 
     public void method1(CatalogDao catalogDao)  {
