@@ -1,21 +1,18 @@
 package project1.lesson15;
 
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import project1.lesson15.client.Client;
-import project1.lesson15.client.ClientServes;
 import project1.lesson15.connection.ConnectionManager;
 import project1.lesson15.connection.ConnectionManagerJdbc;
 import project1.lesson15.dao.CatalogDao;
-import project1.lesson15.seller.Seller;
-import project1.lesson15.catalog.Catalog;
 import project1.lesson15.dao.CatalogDaoJdbc;
 
+import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalDate;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -43,12 +40,33 @@ public class Main {
         CatalogDaoJdbc catalogDao = new CatalogDaoJdbc(connectionManager);
         catalogDao.creatTableClients();
         catalogDao.createTable();
-        Client client = new Client(1,"Anton","1", "1994-02-02");
+        Client client = new Client(1, "Anton", "1", "1994-02-02");
         catalogDao.addTableClients(client);
 
     }
+//    URL url = this.getClass().getClassLoader().getResource("persons.json");
+//        if (url != null) {
+//        List<Person> people = null;
+//        try {
+//            File jsonFile = new File(url.toURI());
+//            ObjectMapper objectMapper = new ObjectMapper();
+//
+//            people = objectMapper.readValue(jsonFile, new TypeReference<List<Person>>() {
+//            });
+//            personRepository.saveAll(people);
+//            logger.info("All records saved.");
+//        } catch (IOException | URISyntaxException e) {
+//            e.printStackTrace();
+//        }
+//
+//    } else {
+//        logger.warn("url in null");
+//    }
 
-    public void method1(CatalogDao catalogDao)  {
+
+
+
+    public void method1(CatalogDao catalogDao) {
 //        Catalog tovar = new Catalog(null, "Helicopter",
 //                2500, "USA");
 ////        LOGGER.info(tovar);
@@ -92,12 +110,6 @@ public class Main {
 //        }
 //
 //        LOGGER.info(clientServes.getRegClients());
-
-
-
-
-
-
 
 
     }

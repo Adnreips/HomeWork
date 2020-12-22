@@ -23,6 +23,7 @@ public class AddCatalogServlet extends HttpServlet {
     @Inject
     private CatalogDao catalogDao;
 
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("PageTitle", "New product");
