@@ -7,7 +7,13 @@ import java.util.BitSet;
  *
  * @author "Andrei Prokofiev"
  */
+
 public class Main {
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+    }
 
     public static void main(String[] args) {
         AnimalFactory animalFactory = new AnimalFactory();
@@ -16,6 +22,7 @@ public class Main {
         cat.voice();
 
         dog.voice();
+
 
         BitSet bitSet =new BitSet();
 

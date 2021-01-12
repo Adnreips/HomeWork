@@ -1,5 +1,7 @@
 package project1.lesson02.task03.person;
 
+import java.util.Objects;
+
 /**
  * Person
  * Класс создает объект типа Person. Класс Person характеризуется полями:
@@ -37,6 +39,21 @@ public class Person {
                 "age = " + age + ", sex = " + sex +
                 ", name = '" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return getAge() == person.getAge() &&
+                getSex() == person.getSex() &&
+                Objects.equals(getName(), person.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAge(), getSex(), getName());
     }
 }
 
