@@ -8,10 +8,11 @@ package project1.lesson02.task03.person;
  * @param name - имя, параметр типа String.
  * @author Andrey
  */
-public class Person {
+public class Person  {
     int age;
     Sex sex;
     String name;
+
 
     public Person(int age, Sex sex, String name) {
         this.age = age;
@@ -38,6 +39,8 @@ public class Person {
                 ", name = '" + name + '\'' +
                 '}';
     }
+
+
 }
 
 

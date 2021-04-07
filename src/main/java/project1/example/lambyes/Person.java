@@ -14,6 +14,10 @@ public class Person {
         this.lastName = lastName;
     }
 
+    public Person() {
+
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -32,9 +36,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+        return String.format("%s %s", firstName, lastName);
     }
 }

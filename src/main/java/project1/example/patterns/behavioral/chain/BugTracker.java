@@ -2,6 +2,8 @@ package project1.example.patterns.behavioral.chain;
 
 import com.thoughtworks.qdox.model.expression.Not;
 
+import java.util.concurrent.CompletableFuture;
+
 /**
  * BugTracker
  *
@@ -18,6 +20,7 @@ public class BugTracker {
 //        reportNotifier.notifyManager("Everything is OK", Priority.ROUTINE);
 //        reportNotifier.notifyManager("Something went wrong", Priority.IMPORTANT);
         reportNotifier.notifyManager("Houston, we've had a problem here!!!", Priority.ASAP);
+        CompletableFuture.allOf();
 
     }
 }

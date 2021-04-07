@@ -1,6 +1,10 @@
 package project1.lesson03.task01;
 
+
+import project1.lesson02.task03.person.Person;
+
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +19,7 @@ public class Task31Main {
         Number[] numbers = {12.0, 2.11, 3.11};
         Number[] numbers2 = {1, 2, 3, 4, 5, 1, 2.11, 3.11};
 
+
         MathBox mathBox = new MathBox(numbers);
         MathBox mathBox2 = new MathBox(numbers2);
 
@@ -24,7 +29,7 @@ public class Task31Main {
         set3.add("adf");
         set3.add("as");
 
-
+        boolean contains = set.contains("adf");
 
         set.addAll(Arrays.asList(numbers));
         System.out.println(set);

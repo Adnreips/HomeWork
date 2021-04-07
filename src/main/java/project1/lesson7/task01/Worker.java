@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class Worker {
 
-    protected ConcurrentHashMap<Integer, BigInteger> hashMap = new ConcurrentHashMap<>();
+    protected Map<Integer, BigInteger> hashMap = new ConcurrentHashMap<>();
 
     public Integer[] prepareArray() {
         Random random = new Random();

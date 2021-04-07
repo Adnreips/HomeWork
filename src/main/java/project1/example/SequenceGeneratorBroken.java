@@ -33,6 +33,7 @@ public class SequenceGeneratorBroken {
 //        }
         Semaphore semaphore =new Semaphore(10);
 
+        semaphore.acquire();
 
         System.out.println(counter);
 

@@ -1,7 +1,7 @@
 package project1.lesson7.task01;
 
 import java.util.Arrays;
-
+import java.util.HashMap;
 
 
 /**
@@ -9,7 +9,9 @@ import java.util.Arrays;
  *
  * @author "Andrei Prokofiev"
  */
-public class Task01Main {
+public class Task01Main <K,V> {
+    HashMap<K, V> hashMap = new HashMap<>();
+
 
     public static void main(String[] args) throws Exception {
 
@@ -17,6 +19,7 @@ public class Task01Main {
 //        Integer[] array = worker.prepareArray();
         Integer[] array = {0, 1, 2, 3, 4, 5};
         System.out.println(Arrays.toString(array));
+
         Long start1 = System.currentTimeMillis();
         for (int i = 0; i < array.length; i++) {
             System.out.println(worker.factorial(array[i]));

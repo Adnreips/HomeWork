@@ -8,6 +8,7 @@ import java.util.*;
  * @author "Andrei Prokofiev"
  */
 public class RecursiveCount {
+
     @Override
     protected void finalize() throws Throwable {
         System.out.println("Сборщик мусора");
