@@ -1,7 +1,16 @@
 package project1.example;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+
+import javax.json.Json;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A
@@ -48,59 +57,73 @@ public class A {
 //        return Objects.hash(var1, var2, var3);
 //    }
 
-    public static void main(String[] args) {
-        int multiply = 3;
+    public static void main(String[] args) throws JsonProcessingException {
 
-        final Integer[][] doubleArray = {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}};
-        List<List<Integer>> collect = Arrays.stream(doubleArray).
-                map(x -> Arrays.stream(x)
-                        .map(o -> o * multiply)
-                        .collect(Collectors.toList()))
-                .collect(Collectors.toList());
-        System.out.println(collect);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+//        String json = "{ \"f1\" : \"v1\" } ";
+//
+//
+//        JsonNode jsonNode = objectMapper.readTree(json);
+//
+//        System.out.println(jsonNode.get("f1").asText());
+
+        String json = "[{\"satellites\":{\"DEBIT_CARD_FEATURE__1\":{\"isSelected\":true,\"type\":\"DEBIT_CARD_FEATURE\",\"subtype\":1}}}" +
+                ",{\"satellites\":{\"VTB_MOBILE__2\":{\"isSelected\":true,\"type\":\"VTB_MOBILE\",\"subtype\":2}}}]";
+        JsonNode jsonNode = objectMapper.readTree(json);
+        System.out.println(jsonNode.get(0).get("satellites").get("DEBIT_CARD_FEATURE__1"));
+
+//        System.out.println(traverse(jsonNode));
+        ;
+
+//
+//        System.out.println(jsonNode.get("satellites"));
+////        traverse(jsonNode);
+//
+//        ArrayNode arrayNode =(ArrayNode) jsonNode;
+//        System.out.println(jsonNode.get(0).get("satellites").get("DEBIT_CARD_FEATURE__1"));
+
 
 
     }
-//    {
-//        System.out.println("Simple block");
-//
-//    }
-//    static {
-//        System.out.println("Static block");
-//
-//    }
+    public static void update(String jsonString, Object object) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            mapper.readerForUpdating(object).readValue(jsonString);
+        } catch (JsonProcessingException e) {
+            //			logger.warn("update json string:" + jsonString + " to object:" + object + " error.", e);
+        } catch (IOException e) {
+            //			logger.warn("update json string:" + jsonString + " to object:" + object + " error.", e);
+        }
+    }
+    public static JsonNode traverse(JsonNode root){
+
+        if(root.isObject()){
+            Iterator<String> fieldNames = root.fieldNames();
+            while(fieldNames.hasNext()) {
+                String fieldName = fieldNames.next();
+                if (fieldName.equals("isSelected")){
+                    System.out.println("++++++++++++++++");
+                    return root.get(fieldName);
+                }
+                JsonNode fieldValue = root.get(fieldName);
+                traverse(fieldValue);
+            }
+        } else
+            if(root.isArray()){
+            ArrayNode arrayNode = (ArrayNode) root;
+            for(int i = 0; i < arrayNode.size(); i++) {
+                JsonNode arrayElement = arrayNode.get(i);
+                traverse(arrayElement);
+            }
+        } else {
+            // JsonNode root represents a single value field - do something with it.
+                System.out.println(root);
+                return root;
+
+        }
+            return null;
+    }
 
 
-//    public static void multiply(Integer[][] doubleArray, int x) {
-//        for (int i = 0; i < doubleArray.length; i++) {
-//            for (int j = 0; j < doubleArray[i].length; j++) {
-//                doubleArray[i][j] = doubleArray[i][j] * x;
-//            }
-//        }
-//
-////        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-////        for (int i = 0; i < stackTrace.length; i++) {
-////            System.out.println(stackTrace[i].getClassName());
-////
-////
-////        }
-////        Integer[] array = new Integer[]{1,2,3};
-////
-////        List<String> list =Arrays.asList("array","1","2");
-////
-////        Boolean b = list.stream().anyMatch("1"::equals);
-////
-////        System.out.println(b);
-////
-////    }
-//
-////    byte[] bytes = new byte[]{9,8};
-////
-////
-////        System.out.println(Arrays.toString(bytes));
-//
-////        System.out.println(x.byteValue());
-//
-//
-//    }
 }
