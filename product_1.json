@@ -1,0 +1,52 @@
+{
+  "imageId": "00000000-0000-0000-0000-000000000005",
+  "insuranceRequired": true,
+  "maxAmount": 999999,
+  "maxRate": 13.2,
+  "maxTerm": 84,
+  "minAmount": 50000,
+  "minRate": 6.9,
+  "minTerm": 6,
+  "presentationCartImageId": "00000000-0000-0000-0000-000000000019",
+  "presentationText": null,
+  "salary": true,
+  "subtype": "4",
+  "templates": [
+    {
+      "title": "Сумма",
+      "value": "{{amount}} ₽"
+    },
+    {
+      "title": "Ставка",
+      "value": "{{minRate}}-{{maxRate}}%"
+    },
+    {
+      "title": "Срок",
+      "value": "{{term}} мес."
+    },
+    {
+      "title": "Платеж",
+      "value": "От {{payment}} ₽ в месяц"
+    }
+  ],
+  "text": "Планируйте любые дела и покупки.",
+  "title": "Кредит наличными",
+  "type": "CASH_LOAN",
+  "amount": 50000,
+  "payment": 8737,
+  "term": 6
+}
+{
+  maxMillionAmountPerYear: number,
+  maxDeductionPerYear: number,
+  termInYears: number,
+  maxAmountForDeduction: number,
+  currency: enum,
+  rate: number,
+  term: number,
+  payPerYear: number,
+  cost: number,
+  minAmount: number,
+  series: string,
+  currency: enum
+}

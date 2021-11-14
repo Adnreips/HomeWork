@@ -1,0 +1,20 @@
+{
+  "investments": {
+    "key": {
+      "entityName": "ИИС",
+      "status": "cm.InvestmentContractStatus.Open"
+    }
+  }
+}
+cost,
+currency,
+hasIndividualInvestmentAccount,
+maxAmountForDeduction,
+maxDeductionPerYear,
+maxMillionAmountPerYear,
+minAmount,
+payPerYear,
+rate,
+series,
+term,
+termInYears

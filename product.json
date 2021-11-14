@@ -1,0 +1,113 @@
+{
+  "subtypes": [
+    {
+      "cost": 1000,
+      "currency": "RUB",
+      "hasIndividualInvestmentAccount":false,
+      "maxTerm": 730,
+      "minAmount": 10000,
+      "minTerm": 365,
+      "payPerYear": 4,
+      "rate": 5.45,
+      "salaryRequirement": false,
+      "subtype": "Obligations1",
+      "text": "",
+      "title": "Облигации ВТБ",
+      "series": "Б-1-205",
+      "texts": [
+        "Потенциальный доход выше, чем по другим банковским продуктам",
+        "Всегда можно продать без потери накопленного купонного дохода",
+        "Надежность банка ВТБ гарантирует все выплаты. Рейтинг надежности A+++",
+        "Для покупки облигаций ВТБ мы откроем для вас брокерский счет"
+      ],
+      "imageId": "00000000-0000-0000-0000-000000000047"
+    },
+    {
+      "cost": 1000,
+      "currency": "RUB",
+      "hasIndividualInvestmentAccount":true,
+      "maxTerm": 730,
+      "minAmount": 10000,
+      "minTerm": 365,
+      "payPerYear": 4,
+      "rate": 5.45,
+      "salaryRequirement": false,
+      "subtype": "Obligations2",
+      "text": "",
+      "title": "Облигации ВТБ",
+      "series": "Б-1-205",
+      "texts": [
+        "Потенциальный доход выше, чем по другим банковским продуктам",
+        "Всегда можно продать без потери накопленного купонного дохода",
+        "Надежность банка ВТБ гарантирует все выплаты. Рейтинг надежности A+++",
+        "Для покупки облигаций ВТБ мы откроем для вас брокерский счет"
+      ],
+      "imageId": "00000000-0000-0000-0000-000000000047"
+    },
+    {
+      "cost": 1000,
+      "currency": "RUB",
+      "hasIndividualInvestmentAccount":true,
+      "maxTerm": 730,
+      "minAmount": 10000,
+      "minTerm": 365,
+      "payPerYear": 4,
+      "rate": 5.45,
+      "salaryRequirement": true,
+      "subtype": "Obligations3",
+      "text": "",
+      "title": "Облигации ВТБ",
+      "series": "Б-1-205",
+      "texts": [
+        "Потенциальный доход выше, чем по другим банковским продуктам",
+        "Всегда можно продать без потери накопленного купонного дохода",
+        "Надежность банка ВТБ гарантирует все выплаты. Рейтинг надежности A+++",
+        "Для покупки облигаций ВТБ мы откроем для вас брокерский счет"
+      ],
+      "imageId": "00000000-0000-0000-0000-000000000047"
+    },
+    {
+      "cost": 1000,
+      "currency": "RUB",
+      "hasIndividualInvestmentAccount":false,
+      "maxTerm": 365,
+      "minAmount": 10000,
+      "minTerm": 365,
+      "payPerYear": 4,
+      "rate": 5.45,
+      "salaryRequirement": true,
+      "subtype": "Obligations4",
+      "text": "",
+      "title": "Облигации ВТБ",
+      "series": "Б-1-205",
+      "texts": [
+        "Потенциальный доход выше, чем по другим банковским продуктам",
+        "Всегда можно продать без потери накопленного купонного дохода",
+        "Надежность банка ВТБ гарантирует все выплаты. Рейтинг надежности A+++",
+        "Для покупки облигаций ВТБ мы откроем для вас брокерский счет"
+      ],
+      "imageId": "00000000-0000-0000-0000-000000000047"
+    },
+    {
+      "cost": 1000,
+      "currency": "RUB",
+      "hasIndividualInvestmentAccount":false,
+      "iiaMaxDeductionPerYear": 52000,
+      "iiaMaxMillionAmountPerYear": 1,
+      "iiaMaxAmountForDeduction": 400000,
+      "iiaTermInYears": 3,
+      "maxTerm": 730,
+      "minAmount": 10000,
+      "minTerm": 548,
+      "payPerYear": 4,
+      "rate": 5.45,
+      "salaryRequirement": true,
+      "series": "Б-1-205",
+      "subtype": "Obligations5",
+      "text": "",
+      "title": "ИИС + Облигации ВТБ"
+    }
+  ],
+  "title": "Интвестиции",
+  "type": "INVESTMENT"
+}

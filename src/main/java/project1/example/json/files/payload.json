@@ -1,0 +1,38 @@
+[
+  {
+    "actionId": "DEBIT_CARD_FEATURE__1",
+    "audit": {
+      "type": "MULTI_SELECT",
+      "satellite": {
+        "type": "DEBIT_CARD_FEATURE",
+        "subtype": 1,
+        "isSelected": true
+      }
+    },
+    "satellites": {
+      "DEBIT_CARD_FEATURE__1": {
+        "type": "DEBIT_CARD_FEATURE",
+        "subtype": 1,
+        "isSelected": true
+      }
+    }
+  },
+  {
+    "actionId": "VTB_MOBILE__2",
+    "audit": {
+      "type": "MULTI_SELECT",
+      "satellite": {
+        "type": "VTB_MOBILE",
+        "subtype": 2,
+        "isSelected": true
+      }
+    },
+    "satellites": {
+      "VTB_MOBILE__2": {
+        "type": "VTB_MOBILE",
+        "subtype": 2,
+        "isSelected": true
+      }
+    }
+  }
+]

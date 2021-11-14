@@ -1,0 +1,19 @@
+[
+  {
+    "audit": {
+      "type": "MULTI_SELECT",
+      "satellite": {
+        "type": "DEBIT_CARD_FEATURE",
+        "subtype": 1,
+        "isSelected": true
+      }
+    },
+    "satellites": {
+      "DEBIT_CARD_FEATURE__1": {
+        "type": "DEBIT_CARD_FEATURE",
+        "subtype": 1,
+        "isSelected": true
+      }
+    }
+  }
+]

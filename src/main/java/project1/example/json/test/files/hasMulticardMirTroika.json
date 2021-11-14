@@ -1,0 +1,8 @@
+{
+  "cards": {
+    "key": {
+      "entityName": "MIR Мультикарта с ТП Тройка",
+      "status": "cm.BankCardStatus.PlasticSentToProduction"
+    }
+  }
+}
