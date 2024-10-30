@@ -1,6 +1,5 @@
 package project1.example.myThreads.threadLocalTest;
 
-import static org.junit.Assert.assertEquals;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,7 +8,6 @@ public class Main {
         new Thread(firstUser).start();
         new Thread(secondUser).start();
 
-        assertEquals(SharedMapWithUserContext.userContextPerUserId.size(), 2);
     }
 
 

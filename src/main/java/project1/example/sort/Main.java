@@ -1,10 +1,6 @@
 package project1.example.sort;
 
-import org.junit.Assert;
-
-import java.net.http.HttpClient;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -18,9 +14,8 @@ public class Main {
 
         int[] sortArray = sortByMerge.sortArray(array);
         System.out.println(Arrays.toString(sortArray));
-        Set<Integer> set =new TreeSet<>();
+        Set<Integer> set = new TreeSet<>();
         set.size();
-
 
 
     }

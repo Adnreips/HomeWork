@@ -1,18 +1,13 @@
 package project1.lesson15.dao;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import project1.lesson15.catalog.Catalog;
 import project1.lesson15.connection.ConnectionManager;
 import project1.lesson15.connection.ConnectionManagerJdbc;
 
-import java.io.IOException;
-import java.sql.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.initMocks;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * CatalogDaoJdbcTest
