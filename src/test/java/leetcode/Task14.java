@@ -22,6 +22,7 @@ public class Task14 {
                 }
             }
             result.append(prevValue);
+
         }
 
         return result.toString();
